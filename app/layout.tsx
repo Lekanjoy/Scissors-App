@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-[poppins] ">
+      <body className="relative font-[Nunito] ">
         <Header />
         {children}
       </body>

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Header from '@/components/header'
 import HeroPage from '@/components/hero'
 import Analytics from '@/components/analytics'
-import bgHero from '../public/hero/heroBg.svg'
+import Why from '@/components/why'
 
 export default function Home() {
   return (
@@ -10,6 +10,7 @@ export default function Home() {
       {/* <Header /> */}
       <HeroPage />
       <Analytics/>
+      <Why/>
     </main>
   );
 }

@@ -21,7 +21,7 @@ const Header = () => {
   const pathname = usePathname();
 
   return (
-    <header className="flex py-3 justify-between items-center px-8 lg:px-[93px]">
+    <header className="fixed left-0 top-0 z-[100] bg-white w-full shadow-md flex py-3 justify-between items-center px-8 lg:px-[93px]">
       <Image src={Logo} alt="Scissors App Logo" />
       <div className="flex justify-between gap-x-10 text-blackVariant">
         {navLinks.map((link) => {
