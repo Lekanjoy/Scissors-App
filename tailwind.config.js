@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         blackVariant: "#141414",
+        primaryColor: "#005AE2", 
       },
       backgroundImage: {
         heroTopBg: "url('../public/hero/topBg.svg')",

@@ -3,6 +3,7 @@ import Header from '@/components/header'
 import HeroPage from '@/components/hero'
 import Analytics from '@/components/analytics'
 import Why from '@/components/why'
+import Pricing from '@/components/pricing'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <HeroPage />
       <Analytics/>
       <Why/>
+      <Pricing/>
     </main>
   );
 }

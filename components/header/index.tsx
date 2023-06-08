@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,8 +21,25 @@ const navLinks: NavLinksProps[] = [
 const Header = () => {
   const pathname = usePathname();
 
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const position = window.pageYOffset;
+      setScrollPosition(position);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const headerStyle =
+    scrollPosition > 100 ? "bg-white shadow-md" : "bg-transparent";
+
   return (
-    <header className="fixed left-0 top-0 z-[100] bg-white w-full shadow-md flex py-3 justify-between items-center px-8 lg:px-[93px]">
+    <header className={`${headerStyle} fixed left-0 top-0 z-[100] w-full flex py-3 justify-between items-center px-8 lg:px-[93px]`}>
       <Image src={Logo} alt="Scissors App Logo" />
       <div className="flex justify-between gap-x-10 text-blackVariant">
         {navLinks.map((link) => {
