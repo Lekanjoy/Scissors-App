@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 
-@layer base{
-
+@layer base {
+    .planBg {
+        background: linear-gradient(180deg, #1E3448 99.99%, rgba(30, 52, 72, 0) 100%);
+        filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.05));
+    }
 }
