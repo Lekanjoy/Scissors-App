@@ -1,4 +1,7 @@
+"use client";
+import Footer from '@/components/footer';
 import './globals.css'
+import { usePathname } from "next/navigation";
 import Header from '@/components/header'
 
 export const metadata = {
@@ -11,11 +14,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname();
+  const isRegistrationPage = pathname === '/signup' || pathname === '/login';
   return (
     <html lang="en">
       <body className="relative font-[Nunito] ">
-        <Header />
+        {isRegistrationPage ? null : <Header />}
         {children}
+        <Footer/>
       </body>
     </html>
   );

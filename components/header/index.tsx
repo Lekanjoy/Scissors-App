@@ -25,7 +25,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const position = window.pageYOffset;
+      const position = window.scrollY;
       setScrollPosition(position);
     };
 
@@ -59,7 +59,7 @@ const Header = () => {
           Log in
         </Link>
         <Link
-          href="/try"
+          href="/signup"
           className="bg-[#005AE2] px-6 py-3 text-white rounded-[100px]"
         >
           Try for free

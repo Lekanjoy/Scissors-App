@@ -1,18 +1,17 @@
-import Image from 'next/image'
-import Header from '@/components/header'
 import HeroPage from '@/components/hero'
 import Analytics from '@/components/analytics'
 import Why from '@/components/why'
 import Pricing from '@/components/pricing'
+import LinkShortenerForm from '@/components/shortener-form'
 
 export default function Home() {
   return (
     <main className="relative w-full">
-      {/* <Header /> */}
       <HeroPage />
       <Analytics/>
       <Why/>
       <Pricing/>
+      <LinkShortenerForm/>
     </main>
   );
 }
