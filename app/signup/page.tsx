@@ -1,59 +1,8 @@
 "use client";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-interface SignUpData {
-  email: string;
-  username: string;
-  password: string;
-  password2: string;
-}
-
-interface SignUpResponse {
-  email: string;
-  username: string;
-}
-
-async function postSignUpData(
-  userEmail: string,
-  userName: string,
-  userPassword: string,
-  confirmPassWord: string
-): Promise<SignUpResponse | undefined> {
-  try {
-    const signUpData: SignUpData = {
-      email: userEmail,
-      username: userName,
-      password: userPassword,
-      password2: confirmPassWord,
-    };
-
-    const response = await fetch(
-      "https://nwa.pythonanywhere.com/api/register/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(signUpData),
-      }
-    );
-    if (response.ok) {
-      const data: SignUpResponse = await response.json();
-      console.log(data);
-      return data;
-    } else {
-      const errorData = await response.json();
-      console.error(errorData);
-      return errorData;
-    }
-  } catch (error) {
-    console.error(error);
-    return undefined;
-  }
-}
+import AuthContext from "@/AuthContext/authContext";
 
 const SignupForm = () => {
   const [userName, setUserName] = useState("");
@@ -61,18 +10,11 @@ const SignupForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const router = useRouter();
+  const { registerUser } = useContext(AuthContext);
 
-  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = await postSignUpData(
-      userName,
-      email,
-      password,
-      confirmPassword
-    );
-    console.log(data);
-    router.push("/login");
+    registerUser(userName, email, password, confirmPassword);
   };
 
   return (

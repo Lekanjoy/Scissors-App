@@ -1,40 +1,22 @@
 'use client'
-import React, {useState } from 'react';
-import { useRouter } from 'next/navigation'
+import React, {useState, useContext} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
-async function postData(userEmail:string, userPassword:string) {
-  try {
-    const response = await fetch('https://nwa.pythonanywhere.com/api/login/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: userEmail,
-        password: userPassword,
-      })
-    });
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-}
+import AuthContext from '@/AuthContext/authContext';
 
 
 const LoginForm = () => {
-  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {user, loginUser } = useContext(AuthContext);
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin =  (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = await postData(email, password);
-    console.log(data);
-    router.push("/");
+
+    loginUser(email, password);
+    console.log(user)
+
+
   };
 
   return (
@@ -68,7 +50,7 @@ const LoginForm = () => {
           <input
             type="email"
             placeholder="Email address or username"
-            className="w-full px-[19px] py-[11px] border bg-transparent border-primaryColor rounded otline-none focus-within:outline-primaryColor"
+            className="w-full px-[19px] py-[11px] border bg-transparent border-primaryColor rounded  focus-within:outline-primaryColor"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -77,7 +59,7 @@ const LoginForm = () => {
           <input
             type="password"
             placeholder="Password"
-            className="w-full px-[19px] py-[11px] border bg-transparent border-primaryColor rounded otline-none focus-within:outline-primaryColor"
+            className="w-full px-[19px] py-[11px] border bg-transparent border-primaryColor rounded  focus-within:outline-primaryColor"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

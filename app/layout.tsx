@@ -1,8 +1,10 @@
 "use client";
+import { useContext } from 'react';
 import Footer from '@/components/footer';
 import './globals.css'
 import { usePathname } from "next/navigation";
 import Header from '@/components/header'
+import { AuthProvider } from '@/AuthContext/authContext';
 
 export const metadata = {
   title: 'Scissors App',
@@ -19,9 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="relative font-[Nunito] ">
+        <AuthProvider>
         {isRegistrationPage ? null : <Header />}
         {children}
         <Footer/>
+        </AuthProvider>
+
       </body>
     </html>
   );
