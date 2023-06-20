@@ -4,15 +4,15 @@ import useAxios from "@/utils/useAxios";
 
 const LinkShortenerForm = () => {
   const api = useAxios();
-  const [originalLink, setOriginalLink] = useState("");
+  const [originalLink, setOriginalLink] = useState<string>("");
   const shortenedRef = useRef<HTMLInputElement>(null);
 
-  const getAllLinks = async () => {
-    // e.preventDefault();
-    const response = await api.get("/links/");
-    const data = await response.data;
-    console.log(data);
-  };
+  // const getAllLinks = async (e) => {
+  //   e.preventDefault();
+  //   const response = await api.get("/links/");
+  //   const data = await response.data;
+  //   console.log(data);
+  // };
 
   // Shortened link function
   const shortenedLink = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,7 +21,6 @@ const LinkShortenerForm = () => {
     const response = await api.post("/links/", {
       original_link: originalLink,
     });
-
     const data = await response.data;
     console.log(data);
     shortenedRef.current.value = data.shortened_link;

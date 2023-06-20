@@ -3,6 +3,8 @@ import Analytics from '@/components/analytics'
 import Why from '@/components/why'
 import Pricing from '@/components/pricing'
 import LinkShortenerForm from '@/components/shortener-form'
+import CTA from '@/components/cta'
+import FAQ from './faq/page'
 
 export default function Home() {
   return (
@@ -12,6 +14,8 @@ export default function Home() {
       <Why/>
       <Pricing/>
       <LinkShortenerForm/>
+      <FAQ/>
+      <CTA/>
     </main>
   );
 }
