@@ -11,7 +11,7 @@ interface NavLinksProps {
 }
 
 const navLinks: NavLinksProps[] = [
-  { title: "My URLs", path: "/" },
+  { title: "My URLs", path: "/myUrls" },
   { title: "Features", path: "/features" },
   { title: "Pricing", path: "/pricing" },
   { title: "Analytics ", path: "/analytics" },
@@ -20,7 +20,6 @@ const navLinks: NavLinksProps[] = [
 
 const Header = () => {
   const pathname = usePathname();
-
   const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {

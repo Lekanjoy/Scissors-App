@@ -7,17 +7,9 @@ const LinkShortenerForm = () => {
   const [originalLink, setOriginalLink] = useState<string>("");
   const shortenedRef = useRef<HTMLInputElement>(null);
 
-  // const getAllLinks = async (e) => {
-  //   e.preventDefault();
-  //   const response = await api.get("/links/");
-  //   const data = await response.data;
-  //   console.log(data);
-  // };
-
   // Shortened link function
   const shortenedLink = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const response = await api.post("/links/", {
       original_link: originalLink,
     });
