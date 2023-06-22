@@ -2,6 +2,7 @@
 import React, { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import axios from "axios";
 import useAxios from "@/utils/useAxios";
 
 const LinkShortenerForm = () => {
@@ -18,7 +19,14 @@ const LinkShortenerForm = () => {
     e.preventDefault();
     // Check if the user has entered a link
     if (!originalLink) {
-      toast.error("Please enter a link", {});
+      toast.error("Please enter a link!", {});
+      return;
+    }
+    // Check if original link is valid link
+    const regex =
+      /^(https?|ftp):\/\/([^\s/$.?#].[^\s]*|www\.[^\s/$.?#].[^\s]*)$/;
+    if (!regex.test(originalLink)) {
+      toast.error("Please enter a valid link!", {});
       return;
     }
     // Send the link to the backend
@@ -33,9 +41,10 @@ const LinkShortenerForm = () => {
       setIsShortening(false);
       // Redirect the user to the myUrls page
       router.push("/myUrls");
-    } catch (error) {
+    } catch (error: unknown) {
+      setIsShortening(false);
       console.error(error);
-      toast.error("Something went wrong 😞", {});
+      axios.isAxiosError(error) && toast.error(`${error.message}`, {});
     }
   };
 

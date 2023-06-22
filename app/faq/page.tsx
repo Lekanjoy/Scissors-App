@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import FAQItem from '@/components/faq/faq-item';
 import { faqData } from '@/utils/faq-data';
 
@@ -11,7 +12,9 @@ const FAQ = () => {
         alt=""
         className="absolute max-w-full max-h-full bottom-0 right-0"
       />
-      <img
+      <Image
+      width={100}
+      height={100}
         src="/FAQ/left-illust.svg"
         alt=""
         className="absolute max-w-full max-h-full top-0 left-0"

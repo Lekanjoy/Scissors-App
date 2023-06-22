@@ -8,15 +8,11 @@ import AuthContext from '@/AuthContext/authContext';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {user, loginUser} = useContext(AuthContext);
+  const {loginUser} = useContext(AuthContext);
 
   const handleLogin =  (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     loginUser(email, password);
-    console.log(user)
-
-
   };
 
   return (

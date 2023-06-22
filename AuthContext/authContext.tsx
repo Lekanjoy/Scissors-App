@@ -2,6 +2,7 @@
 import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext({});
 
@@ -35,32 +36,37 @@ export const AuthProvider = ({ children }: any) => {
 
   const router = useRouter();
 
+  // User LogIn Function
   const loginUser = async (userEmail: string, userPassword: string) => {
-    const response = await fetch("https://nwa.pythonanywhere.com/api/token/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: userEmail,
-        password: userPassword,
-      }),
-    });
-    const data = await response.json();
-    console.log(data);
-
-    if (response.status === 200) {
-      setAuthTokens(data);
-      setUser(jwt_decode(data.access));
-      localStorage.setItem("authTokens", JSON.stringify(data));
-      console.log("Logged In");
-      router.push("/");
-    } else {
-      console.log(response.status);
-      console.log("There was a server issue");
+    try {
+      const response = await fetch(
+        "https://nwa.pythonanywhere.com/api/token/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: userEmail,
+            password: userPassword,
+          }),
+        }
+      );
+      const data = await response.json();
+      if (response.status === 200) {
+        setAuthTokens(data);
+        setUser(jwt_decode(data.access));
+        localStorage.setItem("authTokens", JSON.stringify(data));
+        toast.success("Login Successfull!", {});
+        router.push("/");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Login Unsuccessfull!", {});
     }
   };
 
+  // User Registration Function
   const registerUser = async (
     userEmail: string,
     userName: string,
@@ -74,27 +80,30 @@ export const AuthProvider = ({ children }: any) => {
       password2: confirmPassWord,
     };
 
-    const response = await fetch(
-      "https://nwa.pythonanywhere.com/api/register/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(signUpData),
+    try {
+      const response = await fetch(
+        "https://nwa.pythonanywhere.com/api/register/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(signUpData),
+        }
+      );
+      if (response.status === 201) {
+        const data: SignUpResponse = await response.json();
+        toast.success("Signup Successfull!", {});
+        router.push("/login");
+        return data;
       }
-    );
-    if (response.status === 201) {
-      const data: SignUpResponse = await response.json();
-      console.log(data);
-      router.push("/login");
-      return data;
-    } else {
-      console.log(response.status);
-      console.log("there was a server issue");
+    } catch (error) {
+      console.error(error);
+      toast.error("Signup Unsuccessfull!", {});
     }
   };
 
+  // User Logout Function
   const logoutUser = () => {
     setAuthTokens(null);
     setUser(null);
