@@ -1,5 +1,7 @@
 "use client";
 import { useContext } from 'react';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Footer from '@/components/footer';
 import './globals.css'
 import { usePathname } from "next/navigation";
@@ -22,11 +24,11 @@ export default function RootLayout({
     <html lang="en">
       <body className="relative font-[Nunito] ">
         <AuthProvider>
-        {isRegistrationPage ? null : <Header />}
-        {children}
-        <Footer/>
+          {isRegistrationPage ? null : <Header />}
+          {children}
+          <Footer />
         </AuthProvider>
-
+        <ToastContainer />
       </body>
     </html>
   );

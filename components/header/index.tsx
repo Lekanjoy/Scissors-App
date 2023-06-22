@@ -39,7 +39,7 @@ const Header = () => {
 
   return (
     <header className={`${headerStyle} fixed left-0 top-0 z-[100] w-full flex py-3 justify-between items-center px-8 lg:px-[93px]`}>
-      <Image src={Logo} alt="Scissors App Logo" />
+    <Link href="/"><Image src={Logo} alt="Scissors App Logo" /></Link>
       <div className="flex justify-between gap-x-10 text-blackVariant">
         {navLinks.map((link) => {
           return (
