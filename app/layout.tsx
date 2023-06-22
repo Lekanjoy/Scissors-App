@@ -1,5 +1,4 @@
 "use client";
-import { useContext } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from '@/components/footer';
@@ -8,10 +7,10 @@ import { usePathname } from "next/navigation";
 import Header from '@/components/header'
 import { AuthProvider } from '@/AuthContext/authContext';
 
-export const metadata = {
-  title: 'Scissors App',
-  description: 'Shorten your links with Scissors App',
-}
+// export const metadata = {
+//   title: 'Scissors App',
+//   description: 'Shorten your links with Scissors App',
+// }
 
 export default function RootLayout({
   children,
