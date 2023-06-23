@@ -3,6 +3,8 @@ import React, { useState, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AuthContext from "@/AuthContext/authContext";
+import eye from "@/public/registration/eye.svg";
+
 
 const SignupForm = () => {
   const [userName, setUserName] = useState("");
@@ -74,8 +76,8 @@ const SignupForm = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <img
-            src="/registration/eye.svg"
+          <Image
+            src={eye}
             alt="Eye Hide Icon"
             className="absolute right-2 top-4"
           />

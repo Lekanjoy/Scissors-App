@@ -3,6 +3,7 @@ import React, {useState, useContext} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import AuthContext from '@/AuthContext/authContext';
+import eye from "@/public/registration/eye.svg";
 
 
 const LoginForm = () => {
@@ -59,7 +60,7 @@ const LoginForm = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <img src="/registration/eye.svg" alt="Eye Hide Icon" className="absolute right-2 top-4" />
+          <Image src={eye} alt="Eye Hide Icon" className="absolute right-2 top-4" />
         </div>
         <button
           type="submit"

@@ -3,6 +3,7 @@ import FAQItem from '@/components/faq/faq-item';
 import { faqData } from '@/utils/faq-data';
 import illustLeft from '@/public/FAQ/left-illust.svg'
 import illustRight from '@/public/FAQ/right-illust.svg'
+import before from "@/public/why/before.svg"
 
 const FAQ = () => {
 
@@ -20,7 +21,7 @@ const FAQ = () => {
         className="absolute max-w-full max-h-full top-0 left-0"
       />
       <div className="flex lg:gap-x-4">
-        <img src="/why/before.svg" alt="" className="" />
+        <Image src={before} alt="" className="" />
         <h4 className="font-semibold lg:text-[40px]">FAQ</h4>
       </div>
       <div className="flex flex-col lg:gap-y-8 lg:mt-16">
