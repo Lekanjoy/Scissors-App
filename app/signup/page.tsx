@@ -90,8 +90,8 @@ const SignupForm = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <img
-            src="/registration/eye.svg"
+          <Image
+            src={eye}
             alt="Eye Hide Icon"
             className="absolute right-2 top-4"
           />
@@ -113,11 +113,12 @@ const SignupForm = () => {
         <div className="mt-[15px] text-xs text-[mb-[15px]]">
           <p>By signing in with an account, you agree to </p>
           <p>
-            Sciccor's{" "}
+            Sciccor's &lsquo;
             <span className="text-[#5C6F7F]">
               Terms of Service, Privacy Policy
-            </span>{" "}
-            and <span className="text-[#5C6F7F]">Acceptable Use Policy</span>.
+            </span>
+            &rsquo; and &lsquo;
+            <span className="text-[#5C6F7F]">Acceptable Use Policy</span>.
           </p>
         </div>
       </div>

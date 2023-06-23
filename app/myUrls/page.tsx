@@ -49,7 +49,7 @@ const MyURLs = () => {
     };
 
     getAllLinks();
-  }, [isLoading, api]);
+  }, [isLoading]);
 
   return (
     <div className="w-full flex flex-col min-h-[300px] px-8 lg:px-[93px] lg:mt-[146px]">

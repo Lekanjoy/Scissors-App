@@ -42,7 +42,11 @@ const LoginForm = () => {
       <div className="text-[#5C6F7F] relative mb-8 before:absolute before:bottom-[10px] before:bg-[#A0B1C0] before:right-[20px] before:w-[200px] before:h-[1px] after:absolute after:bottom-[10px] after:left-[20px] after:w-[200px] after:h-[1px] after:bg-[#A0B1C0]">
         Or
       </div>
-      <form autoComplete='true' onSubmit={handleLogin} className="w-[430px] flex flex-col gap-y-8">
+      <form
+        autoComplete="true"
+        onSubmit={handleLogin}
+        className="w-[430px] flex flex-col gap-y-8"
+      >
         <div className="relative w-full">
           <input
             type="email"
@@ -60,7 +64,11 @@ const LoginForm = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Image src={eye} alt="Eye Hide Icon" className="absolute right-2 top-4" />
+          <Image
+            src={eye}
+            alt="Eye Hide Icon"
+            className="absolute right-2 top-4"
+          />
         </div>
         <button
           type="submit"
@@ -71,7 +79,7 @@ const LoginForm = () => {
       </form>
       <div className="w-full text-center mt-[18px]">
         <div className=" text-sm text-[#5C6F7F] mb-[15px]">
-          Don’t have an account? {" "}
+          Don’t have an account?{" "}
           <Link href="/signup" className="text-primaryColor">
             Sign up
           </Link>
@@ -79,11 +87,12 @@ const LoginForm = () => {
         <div className="mt-[15px] text-xs text-[mb-[15px]]">
           <p>By signing in with an account, you agree to </p>
           <p>
-            Sciccor's{" "}
+            Sciccor's &lsquo;
             <span className="text-[#5C6F7F]">
               Terms of Service, Privacy Policy
-            </span>{" "}
-            and <span className="text-[#5C6F7F]">Acceptable Use Policy</span>.
+            </span>
+            &rsquo; and &lsquo;
+            <span className="text-[#5C6F7F]">Acceptable Use Policy</span>.
           </p>
         </div>
       </div>

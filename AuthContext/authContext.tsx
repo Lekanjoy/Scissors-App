@@ -96,6 +96,8 @@ export const AuthProvider = ({ children }: any) => {
         toast.success("Signup Successfull!", {});
         router.push("/login");
         return data;
+      } else {
+        toast.error("Please fill all fields!", {});
       }
     } catch (error) {
       console.error(error);
