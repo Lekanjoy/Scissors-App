@@ -108,6 +108,7 @@ export const AuthProvider = ({ children }: any) => {
     setAuthTokens(null);
     setUser(null);
     localStorage.removeItem("authTokens");
+    toast.success("Logged Out!", {});
     router.push("/login");
   };
 

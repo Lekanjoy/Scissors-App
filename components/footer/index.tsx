@@ -1,25 +1,33 @@
 import Link from "next/link";
+import Image from "next/image";
+import illustRight from "@/public/footer/right-illust.svg";
+import illustLeft from "@/public/footer/left-illust.svg";
+import Logo from "@/public/footer/Logo.svg";
+import Twitter from "@/public/footer/twitter.svg";
+import Instagram from "@/public/footer/instagram.svg";
+import Linkedin from "@/public/footer/linkedin.svg";
+import Facebook from "@/public/footer/facebook.svg";
 
 const Footer = () => {
   return (
     <footer className="relative flex justify-between text-[#112232] text-sm px-8 lg:px-[93px] lg:gap-x-5 lg:pt-[95px] lg:pb-10 2xl:gap-x-[63px]">
-      <img
-        src="/footer/right-illust.svg"
+      <Image
+        src={illustRight}
         alt=""
         className="absolute max-w-full max-h-full bottom-0 right-0"
       />
-      <img
-        src="/CTA/left-illust.svg"
+      <Image
+        src={illustLeft}
         alt=""
-        className="absolute max-w-full max-h-full bottom-0 -left-[350px] rotate-180"
+        className="absolute max-w-full max-h-full bottom-0 left-0"
       />
       <div className="flex flex-col lg:gap-y-10">
-        <img src="/footer/Logo.svg" alt="Scissor Logo" />
+        <Image src={Logo} alt="Scissor Logo" />
         <div className="flex items-center lg:gap-x-6">
-          <img src="/footer/twitter.svg" alt="Twitter Icon" />
-          <img src="/footer/instagram.svg" alt="instagram Icon" />
-          <img src="/footer/linkedin.svg" alt="linkedin Icon" />
-          <img src="/footer/facebook.svg" alt="facebook Icon" />
+          <Image src={Twitter} alt="Twitter Icon" />
+          <Image src={Instagram} alt="instagram Icon" />
+          <Image src={Linkedin} alt="linkedin Icon" />
+          <Image src={Facebook}alt="facebook Icon" />
         </div>
       </div>
       <div className="flex flex-col lg:gap-y-14">

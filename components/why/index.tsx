@@ -4,6 +4,7 @@ import custom from "../../public/why/edit.svg";
 import qr from "../../public/why/grid.svg";
 import analytics from "../../public/why/activity.svg";
 import before from "../../public/why/before.svg";
+
 const Why = () => {
   return (
     <section className="bg-white text-blackVariant flex justify-between lg:gap-x-24 px-8 lg:px-[93px] lg:py-[136px]">

@@ -12,7 +12,7 @@ const HeroPage = () => {
   return (
     <section className="relative bg-heroBg bg-no-repeat bg-cover bg-center text-center flex flex-col justify-center items-center px-8 lg:px-[93px] lg:pt-[146px]">
       <h1 className="text-blackVariant  font-bold lg:text-5xl lg:mb-2 lg:leading-[96px]">
-        Optimize Your Online Experience with Our Advanced{" "}
+        Optimize Your Online Experience with Our <br /> Advanced{" "}
         <span className="text-[#005AE2] relative">
           URL Shortening
           <Image
@@ -41,9 +41,9 @@ const HeroPage = () => {
           Sign Up
         </Link>
       </div>
-      <div className="relative mt-20 mb-[76px] z-[10] flex flex-col justify-center items-center max-w-[505px] rounded-3xl text-center border-[0.5px] border-[#005AE2] bg-[rgba(254,_254,_254,_0.1)]  lg:px-[60px] lg:py-10">
+      <div className="relative mt-20 mb-[76px] z-[10 flex flex-col justify-center items-center max-w-[505px] rounded-3xl text-center border-[0.5px] border-[#005AE2] bg-[rgba(254,_254,_254,_0.1)]  lg:px-[60px] lg:py-10">
         <div className="flex items-center gap-x-6 mb-4">
-          <Image src={link3} alt="Three link " />
+          <Image src={link3} alt="Three link "/>
           <Image src={arrow} alt="arrow-right" />
           <Image src={link} alt="one link" />
         </div>
@@ -51,7 +51,13 @@ const HeroPage = () => {
           Seamlessly transform your long URLs into concise and shareable links
           with just few clicks.
         </p>
-          <Image src={boxIllust} alt="one link" className="absolute -left-[8rem] -top-[1rem] -z-[1]"/>
+        <div className="">
+          <Image
+            src={boxIllust}
+            alt=""
+            className="absolute -left-[8rem] -top-[1rem] -z-[10]"
+          />
+        </div>
       </div>
     </section>
   );

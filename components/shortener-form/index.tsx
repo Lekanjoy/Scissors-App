@@ -1,9 +1,14 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { toast } from "react-toastify";
 import axios from "axios";
 import useAxios from "@/utils/useAxios";
+import illustRight from '@/public/form/illust-right.svg'
+import illustLeft from '@/public/form/illust-left.svg'
+import chevronDownIcon from '@/public/form/chevron-down.svg';
+import wand from '@/public/form/magic wand.svg';
 
 const LinkShortenerForm = () => {
   const router = useRouter();
@@ -29,7 +34,7 @@ const LinkShortenerForm = () => {
       toast.error("Please enter a valid link!", {});
       return;
     }
-    // Send the link to the backend
+    // Send the user's link to the backend
     setIsShortening(true);
     try {
       const response = await api.post("/links/", {
@@ -64,20 +69,20 @@ const LinkShortenerForm = () => {
   };
 
   return (
-    <div className="shorten relative lg:min-h-523px lg:py-[84px]">
-      <img
-        src="/form/illust-right.svg"
+    <div className="shorten w-full flex justify-center items-center relative lg:min-h-523px lg:py-[84px]">
+      <Image
+        src={illustRight}
         alt=""
         className="absolute max-w-full max-h-full bottom-0 right-0"
       />
-      <img
-        src="/form/illust-left.svg"
+      <Image
+        src={illustLeft}
         alt=""
         className="absolute max-w-full max-h-full top-0 left-0"
       />
       <form
         onSubmit={shortenedLink}
-        className="min-w-[476px] z-50  mx-[480px] text-[#3284FF] text-sm px-[42px] pb-[52px] pt-[42px] bg-white rounded-xl "
+        className="max-w-[476px] z-50  mx-[480px] text-[#3284FF] text-sm px-[42px] pb-[52px] pt-[42px] bg-white rounded-xl "
       >
         <div className="mb-4 w-full relative">
           <input
@@ -115,9 +120,9 @@ const LinkShortenerForm = () => {
                 </p>
               </div>
             )}
-            <img
+            <Image
               onClick={() => setToggleShowDomain(!toggleShowDomain)}
-              src="/form/chevron-down.svg"
+              src={chevronDownIcon}
               alt="Chevron down icon"
               className="absolute cursor-pointer max-w-full max-h-full top-[25%] right-[15px]"
             />
@@ -138,7 +143,7 @@ const LinkShortenerForm = () => {
           ${isShortening ? "cursor-not-allowed" : "cursor-pointer"}`}
         >
           Trim URL
-          <img src="/form/magic wand.svg" alt="" className="" />
+          <Image src={wand} alt="" className="" />
         </button>
         <p className="text-sm text-[#4991FF]">
           By clicking TrimURL, I agree to the{" "}

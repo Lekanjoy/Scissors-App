@@ -2,8 +2,8 @@ import { useContext } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import dayjs from "dayjs";
-import AuthContext from '../AuthContext/authContext'
-
+import { toast } from "react-toastify";
+import AuthContext from "../AuthContext/authContext";
 
 const baseURL = "https://nwa.pythonanywhere.com";
 
@@ -12,23 +12,26 @@ const useAxios = () => {
 
   const axiosInstance = axios.create({
     baseURL,
-    headers: { Authorization: `Bearer ${authTokens?.access}` }
+    headers: { Authorization: `Bearer ${authTokens?.access}` },
   });
 
-  axiosInstance.interceptors.request.use(async req => {
-    const user = jwt_decode(authTokens.access);
-    const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
+  axiosInstance.interceptors.request.use(async (req) => {
+    try {
+      const user = jwt_decode(authTokens.access);
+      const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
+      if (!isExpired) return req;
+    } catch (error) {
+      console.error(error);
+      toast.error("Please login first");
+    };
 
-    if (!isExpired) return req;
-
+    // Refresh Token
     const response = await axios.post(`${baseURL}/api/token/refresh/`, {
-      refresh: authTokens.refresh
+      refresh: authTokens.refresh,
     });
     localStorage.setItem("authTokens", JSON.stringify(response.data));
-
     setAuthTokens(response.data);
     setUser(jwt_decode(response.data.access));
-
     req.headers.Authorization = `Bearer ${response.data.access}`;
     return req;
   });

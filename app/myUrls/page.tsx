@@ -1,9 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Image from 'next/image'
 import { toast } from "react-toastify";
 import useAxios from "@/utils/useAxios";
 import MyURLsItem from "@/components/myURLsItem";
 import ConfirmationModal from "@/components/confirmation-modal";
+import before from "@/public/why/before.svg";
 
 interface MyURLDataProps {
   id: number;
@@ -52,7 +54,7 @@ const MyURLs = () => {
   return (
     <div className="w-full flex flex-col min-h-[300px] px-8 lg:px-[93px] lg:mt-[146px]">
       <div className="flex text-blackVariant mb-6 justify-center bg-white items-center lg:gap-x-4">
-        <img src="/why/before.svg" alt="" className="" />
+        <Image src={before} alt="" className="" />
         <h4 className="font-semibold text-primaryColor italic lg:text-[40px]">
           My URLs
         </h4>

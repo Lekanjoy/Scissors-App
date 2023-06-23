@@ -1,21 +1,21 @@
 import Image from 'next/image'
 import FAQItem from '@/components/faq/faq-item';
 import { faqData } from '@/utils/faq-data';
+import illustLeft from '@/public/FAQ/left-illust.svg'
+import illustRight from '@/public/FAQ/right-illust.svg'
 
 const FAQ = () => {
 
 
   return (
     <section className="relative text-[#141414] flex items-center justify-center flex-col w-full px-8 lg:min-h-[1000px] lg:pt-11 lg:pb-[155px] lg:px-[93px]">
-      <img
-        src="/FAQ/right-illust.svg"
+      <Image
+        src={illustRight}
         alt=""
         className="absolute max-w-full max-h-full bottom-0 right-0"
       />
       <Image
-      width={100}
-      height={100}
-        src="/FAQ/left-illust.svg"
+        src={illustLeft}
         alt=""
         className="absolute max-w-full max-h-full top-0 left-0"
       />
@@ -29,7 +29,6 @@ const FAQ = () => {
             <FAQItem faq={faq} key={faq.id} />
           );
         })}
-
       </div>
     </section>
   );

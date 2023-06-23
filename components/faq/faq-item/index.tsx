@@ -1,5 +1,8 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image"; 
+import plusIcon from "@/public/FAQ/plus.svg";
+import minusIcon from "@/public/FAQ/minus.svg"; 
 
 interface FAQItemProps {
     faq: {
@@ -23,23 +26,23 @@ const FAQItem = ({ faq }: FAQItemProps) => {
           {faq.question}
         </h5>
         {!active ? (
-          <img
+          <Image
             onClick={toggleAccordion}
-            src="/FAQ/plus.svg"
+            src={plusIcon}
             alt="Expand icon"
             className="cursor-pointer z-10"
           />
         ) : (
-          <img
+          <Image
             onClick={toggleAccordion}
-            src="/FAQ/minus.svg"
+            src={minusIcon}
             alt="Collapse icon"
             className="cursor-pointer z-10"
           />
         )}
       </div>
       {active && (
-        <p className="lg:mt-4 lg:leading-8 lg:text-sm">{faq.answer}</p>
+        <p className="lg:mt-4 lg:leading-8 lg:text-base">{faq.answer}</p>
       )}
     </div>
   );
