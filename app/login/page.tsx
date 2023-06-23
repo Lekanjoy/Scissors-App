@@ -87,7 +87,7 @@ const LoginForm = () => {
         <div className="mt-[15px] text-xs text-[mb-[15px]]">
           <p>By signing in with an account, you agree to </p>
           <p>
-            Sciccor's &lsquo;
+            Sciccor&lsquo;s &lsquo;
             <span className="text-[#5C6F7F]">
               Terms of Service, Privacy Policy
             </span>
