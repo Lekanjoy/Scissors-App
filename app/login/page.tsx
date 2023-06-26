@@ -1,20 +1,23 @@
-'use client'
-import React, {useState, useContext} from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import AuthContext from '@/AuthContext/authContext';
+"use client";
+import React, { useContext, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import AuthContext from "@/AuthContext/authContext";
+import { revealPassword } from "@/utils/revealPassword";
 import eye from "@/public/registration/eye.svg";
 
-
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const EmailRef = useRef<HTMLInputElement>(null);
+  const PasswordRef = useRef<HTMLInputElement>(null);
   const {loginUser} = useContext(AuthContext);
 
-  const handleLogin =  (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    loginUser(email, password);
-  };
+    // Check if EmailRef and PasswordRef are not null or undefined
+    if (!EmailRef.current || !PasswordRef.current) return;
+    loginUser(EmailRef.current?.value, PasswordRef.current?.value);
+  }; 
 
   return (
     <section className="flex flex-col justify-center  items-center w-full h-screen px-8 lg:px-[93px] lg:pt-[146px]">
@@ -49,25 +52,24 @@ const LoginForm = () => {
       >
         <div className="relative w-full">
           <input
+            ref={EmailRef}
             type="email"
             placeholder="Email address or username"
             className="w-full px-[19px] py-[11px] border bg-transparent border-primaryColor rounded  focus-within:outline-primaryColor"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="relative w-full">
           <input
+            ref={PasswordRef}
             type="password"
             placeholder="Password"
             className="w-full px-[19px] py-[11px] border bg-transparent border-primaryColor rounded  focus-within:outline-primaryColor"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
           />
           <Image
             src={eye}
             alt="Eye Hide Icon"
-            className="absolute right-2 top-4"
+            className="absolute right-2 top-4 cursor-pointer"
+            onClick={() => revealPassword(PasswordRef)}
           />
         </div>
         <button

@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import AuthContext from "../AuthContext/authContext";
 
-const baseURL = "https://nwa.pythonanywhere.com";
+const baseURL = "https://nwa.pythonanywhere.com"; // Move this to .env and other endpoints
 
 const useAxios = () => {
   const { authTokens, setUser, setAuthTokens } = useContext(AuthContext);
@@ -17,17 +17,17 @@ const useAxios = () => {
 
   axiosInstance.interceptors.request.use(async (req) => {
     try {
-      const user = jwt_decode(authTokens.access);
+      const user = jwt_decode(authTokens?.access);
       const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
       if (!isExpired) return req;
     } catch (error) {
       console.error(error);
       toast.error("Please login first");
-    };
+    }
 
     // Refresh Token
     const response = await axios.post(`${baseURL}/api/token/refresh/`, {
-      refresh: authTokens.refresh,
+      refresh: authTokens?.refresh,
     });
     localStorage.setItem("authTokens", JSON.stringify(response.data));
     setAuthTokens(response.data);

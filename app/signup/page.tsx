@@ -1,22 +1,30 @@
 "use client";
-import React, { useState, useContext } from "react";
+import React, { useContext, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AuthContext from "@/AuthContext/authContext";
+import { revealPassword } from "@/utils/revealPassword";
 import eye from "@/public/registration/eye.svg";
 
-
 const SignupForm = () => {
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const UserNameRef = useRef<HTMLInputElement>(null);
+  const EmailRef = useRef<HTMLInputElement>(null);
+  const PasswordRef = useRef<HTMLInputElement>(null);
+  const PasswordConfirmRef = useRef<HTMLInputElement>(null);
 
   const { registerUser } = useContext(AuthContext);
 
   const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    registerUser(userName, email, password, confirmPassword);
+    // Check if EmailRef and PasswordRef are not null or undefined
+    if (!EmailRef.current || !PasswordRef.current || !PasswordConfirmRef.current || !UserNameRef.current) return;
+    
+    registerUser(
+      EmailRef.current?.value,
+      PasswordRef.current?.value,
+      PasswordConfirmRef.current?.value,
+      UserNameRef.current?.value
+    );
   };
 
   return (
@@ -52,48 +60,46 @@ const SignupForm = () => {
       >
         <div className="relative w-full">
           <input
+            ref={UserNameRef}
             type="text"
             placeholder="Username"
             className="w-full px-[19px] py-[11px] border bg-transparent border-primaryColor rounded otline-none focus-within:outline-primaryColor"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
           />
         </div>
         <div className="relative w-full">
           <input
+            ref={EmailRef}
             type="email"
             placeholder="Email "
             className="w-full px-[19px] py-[11px] border bg-transparent border-primaryColor rounded otline-none focus-within:outline-primaryColor"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="relative w-full">
           <input
+            ref={PasswordRef}
             type="password"
             placeholder="Password"
             className="w-full px-[19px] py-[11px] border bg-transparent border-primaryColor rounded otline-none focus-within:outline-primaryColor"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
           />
           <Image
             src={eye}
             alt="Eye Hide Icon"
-            className="absolute right-2 top-4"
+            className="absolute right-2 top-4 cursor-pointer"
+            onClick={() => revealPassword(PasswordRef)}
           />
         </div>
         <div className="relative w-full">
           <input
+            ref={PasswordConfirmRef}
             type="password"
             placeholder="Retype Password"
             className="w-full px-[19px] py-[11px] border bg-transparent border-primaryColor rounded otline-none focus-within:outline-primaryColor"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <Image
             src={eye}
             alt="Eye Hide Icon"
-            className="absolute right-2 top-4"
+            className="absolute right-2 top-4 cursor-pointer"
+            onClick={() => revealPassword(PasswordConfirmRef)}
           />
         </div>
         <button

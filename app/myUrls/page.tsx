@@ -1,10 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Image from 'next/image'
+import Image from "next/image";
 import { toast } from "react-toastify";
 import useAxios from "@/utils/useAxios";
 import MyURLsItem from "@/components/myURLsItem";
 import ConfirmationModal from "@/components/confirmation-modal";
+import GenerateQRCodeModal from "@/components/generate-qr-modal";
 import before from "@/public/why/before.svg";
 
 interface MyURLDataProps {
@@ -18,6 +19,8 @@ const MyURLs = () => {
   const [myUrls, setMyUrls] = useState<MyURLDataProps[]>([]);
   const [copiedLink, setCopiedLink] = useState<string>("");
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [showQRCodeModal, setShowQRCodeModal] = useState<boolean>(false);
+  const [QRCodeImageLink, setQRCodeImageLink] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Axios instance
@@ -39,6 +42,20 @@ const MyURLs = () => {
     setCopiedLink(link);
     toast.success("Link Copied!", {});
   };
+
+  // Generate Unique QRcode
+  const generateQRCode = async (url:string) => {
+    try{
+      const response = fetch(`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${url}`)
+      const QRcode = await response.then(res => res.url)
+      setQRCodeImageLink(QRcode);
+      toast.success("QR Code generated successfully!", {});
+    } catch(error){
+      console.error(error);
+      toast.error("Error generating QRcode", {});
+    }
+  };
+
 
   // List out all links that the user has shortened
   useEffect(() => {
@@ -70,6 +87,7 @@ const MyURLs = () => {
           </tr>
         </thead>
         <tbody className="mt-20">
+          {myUrls.length < 1 && <p className='w-full p-4 flex justify-center items-center text-xl'>YOU HAVE NO LINKS YET</p>}
           {myUrls.map((url, index) => (
             <>
               <MyURLsItem
@@ -77,6 +95,8 @@ const MyURLs = () => {
                 url={url}
                 index={index}
                 setShowModal={setShowModal}
+                setShowQRCodeModal={setShowQRCodeModal}
+                generateQRCode={generateQRCode}
                 copiedLink={copiedLink}
                 copyLink={copyLink}
               />
@@ -86,6 +106,11 @@ const MyURLs = () => {
                 deleteLink={deleteLink}
                 url={url}
                 isLoading={isLoading}
+              />
+              <GenerateQRCodeModal
+                showQRcodeModal={showQRCodeModal}
+                setShowQRCodeModal={setShowQRCodeModal}
+                QRCodeImageLink={QRCodeImageLink}
               />
             </>
           ))}

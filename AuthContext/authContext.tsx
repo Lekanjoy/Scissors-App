@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-const AuthContext = createContext({});
+const AuthContext = createContext({} as ContextDataType);
 
 interface SignUpData {
   email: string;
@@ -17,6 +17,29 @@ interface SignUpResponse {
   email: string;
   username: string;
 }
+
+type ContextDataType = {
+  user: any;
+  setUser: (data: any) => void;
+  setAuthTokens: (data: {
+    access: string;
+    refresh: string;
+  }) => void;
+  authTokens: {
+    access: string;
+    refresh: string;
+  } ;
+  loginUser: (userEmail: string, userPassword: string) => void;
+  registerUser: (
+    userEmail: string,
+    userName: string,
+    userPassword: string,
+    confirmPassWord: string
+  ) => void;
+  logoutUser: () => void;
+};
+
+
 
 export default AuthContext;
 
@@ -69,15 +92,15 @@ export const AuthProvider = ({ children }: any) => {
   // User Registration Function
   const registerUser = async (
     userEmail: string,
-    userName: string,
     userPassword: string,
-    confirmPassWord: string
+    confirmPassWord: string,
+    userName: string,
   ) => {
     const signUpData: SignUpData = {
       email: userEmail,
-      username: userName,
       password: userPassword,
       password2: confirmPassWord,
+      username: userName,
     };
 
     try {
@@ -96,8 +119,6 @@ export const AuthProvider = ({ children }: any) => {
         toast.success("Signup Successfull!", {});
         router.push("/login");
         return data;
-      } else {
-        toast.error("Please fill all fields!", {});
       }
     } catch (error) {
       console.error(error);
@@ -114,7 +135,7 @@ export const AuthProvider = ({ children }: any) => {
     router.push("/login");
   };
 
-  const contextData = {
+  const contextData : ContextDataType = {
     user,
     setUser,
     authTokens,

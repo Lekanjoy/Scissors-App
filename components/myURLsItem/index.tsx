@@ -1,5 +1,5 @@
  'use client'
-import { FaTrash, FaCopy } from "react-icons/fa";
+import { FaTrash, FaCopy, FaQrcode } from "react-icons/fa";
 import Link from "next/link";
 
 type MyURLsItemProps = {
@@ -12,6 +12,8 @@ type MyURLsItemProps = {
   index: number;
   copiedLink: string;
   setShowModal: (prevState: boolean) => void;
+  setShowQRCodeModal: (prevState: boolean) => void;
+  generateQRCode:(url:string) =>  void;
   copyLink: (link: string) => void;
 };
 
@@ -20,6 +22,8 @@ const MyURLsItem = ({
   index,
   copiedLink,
   setShowModal,
+  setShowQRCodeModal,
+  generateQRCode,
   copyLink,
 }: MyURLsItemProps) => {
   
@@ -37,9 +41,9 @@ const MyURLsItem = ({
         </Link>
       </td>
       <td className="px-4 py-2 border-r-2">{url.count}</td>
-      <td className="px-4 py-2 border-r-2  flex gap-x-2">
+      <td className="px-4 py-2  flex items-center justify-center gap-x-2">
         <button
-          className={`bg-primaryColor text-sm text-white font-semibold py-1 px-2 rounded hover:bg-blue-500 ${
+          className={`bg-gray-600 text-sm text-white font-semibold py-1 px-2 rounded hover:bg-gray-400 ${
             copiedLink === url.shortened_link ? "bg-green-700" : ""
           }`}
           onClick={() => copyLink(url.shortened_link)}
@@ -51,6 +55,15 @@ const MyURLsItem = ({
           onClick={() => setShowModal(true)}
         >
           <FaTrash />
+        </button>
+        <button
+          className="bg-[#4169E1] text-white font-bold py-1 px-2 rounded hover:bg-blue-500"
+          onClick={() => {
+            setShowQRCodeModal(true)
+            generateQRCode(url.original_link)
+          }}
+        >
+          <FaQrcode/>
         </button>
       </td>
     </tr>

@@ -19,6 +19,7 @@ const LinkShortenerForm = () => {
   const aliasRef = useRef<HTMLInputElement>(null);
   const [toggleShowDomain, setToggleShowDomain] = useState<boolean>(false);
 
+
   // Shortened link function
   const shortenedLink = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -82,7 +83,7 @@ const LinkShortenerForm = () => {
       />
       <form
         onSubmit={shortenedLink}
-        className="max-w-[476px] z-50  mx-[480px] text-[#3284FF] text-sm px-[42px] pb-[52px] pt-[42px] bg-white rounded-xl "
+        className="max-w-[476px] z-50 mx-[480px] text-[#3284FF] text-sm px-[42px] pb-[52px] pt-[42px] bg-white rounded-xl "
       >
         <div className="mb-4 w-full relative">
           <input
@@ -142,11 +143,11 @@ const LinkShortenerForm = () => {
           className={`relative w-full flex justify-center items-center gap-x-[14px] mb-[22px] px-6 py-3  text-sm bg-primaryColor rounded-full text-white  hover:bg-blue-600
           ${isShortening ? "cursor-not-allowed" : "cursor-pointer"}`}
         >
-          Trim URL
+         {isShortening ? 'Trimming URL...' : 'Trim URL'}
           <Image src={wand} alt="" className="" />
         </button>
         <p className="text-sm text-[#4991FF]">
-          By clicking TrimURL, I agree to the{" "}
+          By clicking Trim URL, I agree to the{" "}
           <span className="text-[#3284FF] font-medium">
             Terms of Service, Privacy Policy{" "}
           </span>

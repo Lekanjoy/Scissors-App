@@ -13,10 +13,10 @@ interface NavLinksProps {
 
 const navLinks: NavLinksProps[] = [
   { title: "My URLs", path: "/myUrls" },
-  { title: "Features", path: "/features" },
-  { title: "Pricing", path: "/pricing" },
-  { title: "Analytics ", path: "/analytics" },
-  { title: "FAQs ", path: "/faq" },
+  { title: "Features", path: "/#features" },
+  { title: "Pricing", path: "/#pricing" },
+  { title: "Analytics ", path: "/#analytics" },
+  { title: "FAQs ", path: "/#faq" },
 ];
 
 const Header = () => {

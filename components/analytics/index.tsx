@@ -17,8 +17,9 @@ const analyticsData: AnalyticsProps[] = [
 ];
 
 const Analytics = () => {
+  
   return (
-    <div className="bg-[#F9FBFD] text-blackVariant w-full min-h-[220px] flex justify-between gap-x-8 items-center px-8 lg:px-[93px]">
+    <div id='analytics' className="bg-[#F9FBFD] text-blackVariant w-full min-h-[220px] flex justify-between gap-x-8 items-center px-8 lg:px-[93px]">
       <div className="text-[40px] font-bold">
         <p>One Stop</p>
         <p>

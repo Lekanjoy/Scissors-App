@@ -7,7 +7,7 @@ import before from "../../public/why/before.svg";
 
 const Why = () => {
   return (
-    <section className="bg-white text-blackVariant flex justify-between lg:gap-x-24 px-8 lg:px-[93px] lg:py-[136px]">
+    <section id='features' className="bg-white text-blackVariant flex justify-between lg:gap-x-24 px-8 lg:px-[93px] lg:py-[136px]">
       <div className="flex flex-col max-w-[420px] ">
         <h3 className="flex whitespace-nowrap lg:mb-6 lg:font-bold lg:text-[40px]">
           <Image src={before} alt="" className="lg:mr-4" />

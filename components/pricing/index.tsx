@@ -4,7 +4,7 @@ import PricingCard from "../pricing-card";
 
 const Pricing = () => {
   return (
-    <section className="w-full px-8 text-blackVariant lg:px-[93px] lg:pt-[42px] lg:pb-[112px]">
+    <section id='pricing' className="w-full px-8 text-blackVariant lg:px-[93px] lg:pt-[42px] lg:pb-[112px]">
       <div className="text-center flex flex-col justify-center items-center  lg:mb-[68px]">
         <div className="flex lg:gap-x-4">
           <Image src={before} alt="" className="" />
