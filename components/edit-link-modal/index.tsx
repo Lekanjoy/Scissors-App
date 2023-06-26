@@ -39,6 +39,8 @@ setIsLoading
       });
       await response.data;
       setIsLoading(false);
+      setCustomLink("");
+        setShowEditModal(false);
       toast.success("Link Edited successfully!", {});
     } catch (error) {
       console.error(error);
