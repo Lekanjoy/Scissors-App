@@ -7,6 +7,7 @@ import MyURLsItem from "@/components/myURLsItem";
 import ConfirmationModal from "@/components/confirmation-modal";
 import GenerateQRCodeModal from "@/components/generate-qr-modal";
 import before from "@/public/why/before.svg";
+import EditLinkModal from "@/components/edit-link-modal";
 
 interface MyURLDataProps {
   id: number;
@@ -21,6 +22,7 @@ const MyURLs = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showQRCodeModal, setShowQRCodeModal] = useState<boolean>(false);
   const [QRCodeImageLink, setQRCodeImageLink] = useState<string>('')
+  const [showEditModal, setShowEditModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Axios instance
@@ -42,6 +44,7 @@ const MyURLs = () => {
     setCopiedLink(link);
     toast.success("Link Copied!", {});
   };
+
 
   // Generate Unique QRcode
   const generateQRCode = async (url:string) => {
@@ -96,6 +99,7 @@ const MyURLs = () => {
                 index={index}
                 setShowModal={setShowModal}
                 setShowQRCodeModal={setShowQRCodeModal}
+                setShowEditModal={setShowEditModal}
                 generateQRCode={generateQRCode}
                 copiedLink={copiedLink}
                 copyLink={copyLink}
@@ -111,6 +115,13 @@ const MyURLs = () => {
                 showQRcodeModal={showQRCodeModal}
                 setShowQRCodeModal={setShowQRCodeModal}
                 QRCodeImageLink={QRCodeImageLink}
+              />
+              <EditLinkModal
+                url={url}
+                showEditModal={showEditModal}
+                setShowEditModal={setShowEditModal}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
               />
             </>
           ))}

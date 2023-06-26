@@ -5,10 +5,10 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import axios from "axios";
 import useAxios from "@/utils/useAxios";
-import illustRight from '@/public/form/illust-right.svg'
-import illustLeft from '@/public/form/illust-left.svg'
-import chevronDownIcon from '@/public/form/chevron-down.svg';
-import wand from '@/public/form/magic wand.svg';
+import illustRight from "@/public/form/illust-right.svg";
+import illustLeft from "@/public/form/illust-left.svg";
+import chevronDownIcon from "@/public/form/chevron-down.svg";
+import wand from "@/public/form/magic wand.svg";
 
 const LinkShortenerForm = () => {
   const router = useRouter();
@@ -18,7 +18,6 @@ const LinkShortenerForm = () => {
   const domainOptionsRef = useRef<HTMLInputElement>(null);
   const aliasRef = useRef<HTMLInputElement>(null);
   const [toggleShowDomain, setToggleShowDomain] = useState<boolean>(false);
-
 
   // Shortened link function
   const shortenedLink = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -50,7 +49,8 @@ const LinkShortenerForm = () => {
     } catch (error: unknown) {
       setIsShortening(false);
       console.error(error);
-      axios.isAxiosError(error) && toast.error(`${error.message}`, {});
+      axios.isAxiosError(error) &&
+        toast.error(`${error?.response?.data || error.message}`);
     }
   };
 
@@ -65,7 +65,7 @@ const LinkShortenerForm = () => {
       aliasRef.current!.disabled = false;
       aliasRef.current!.focus();
     }
-    // Hide the domain options`
+    // Hide the domain options
     setToggleShowDomain(false);
   };
 
@@ -83,7 +83,7 @@ const LinkShortenerForm = () => {
       />
       <form
         onSubmit={shortenedLink}
-        className="max-w-[476px] z-50 mx-[480px] text-[#3284FF] text-sm px-[42px] pb-[52px] pt-[42px] bg-white rounded-xl "
+        className="min-w-[476px] z-50 max-w-[480px] text-[#3284FF] text-sm px-[42px] pb-[52px] pt-[42px] bg-white rounded-xl "
       >
         <div className="mb-4 w-full relative">
           <input
@@ -143,7 +143,7 @@ const LinkShortenerForm = () => {
           className={`relative w-full flex justify-center items-center gap-x-[14px] mb-[22px] px-6 py-3  text-sm bg-primaryColor rounded-full text-white  hover:bg-blue-600
           ${isShortening ? "cursor-not-allowed" : "cursor-pointer"}`}
         >
-         {isShortening ? 'Trimming URL...' : 'Trim URL'}
+          {isShortening ? "Trimming URL..." : "Trim URL"}
           <Image src={wand} alt="" className="" />
         </button>
         <p className="text-sm text-[#4991FF]">

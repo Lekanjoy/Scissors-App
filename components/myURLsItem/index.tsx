@@ -1,5 +1,5 @@
- 'use client'
-import { FaTrash, FaCopy, FaQrcode } from "react-icons/fa";
+"use client";
+import { FaTrash, FaCopy, FaQrcode, FaEdit } from "react-icons/fa";
 import Link from "next/link";
 
 type MyURLsItemProps = {
@@ -13,7 +13,8 @@ type MyURLsItemProps = {
   copiedLink: string;
   setShowModal: (prevState: boolean) => void;
   setShowQRCodeModal: (prevState: boolean) => void;
-  generateQRCode:(url:string) =>  void;
+  setShowEditModal: (prevState: boolean) => void;
+  generateQRCode: (url: string) => void;
   copyLink: (link: string) => void;
 };
 
@@ -23,10 +24,10 @@ const MyURLsItem = ({
   copiedLink,
   setShowModal,
   setShowQRCodeModal,
+  setShowEditModal,
   generateQRCode,
   copyLink,
 }: MyURLsItemProps) => {
-  
   return (
     <tr className="bg-white border-b-2">
       <td className="px-4 py-2 border-r-2 ">{index + 1}.</td>
@@ -51,23 +52,31 @@ const MyURLsItem = ({
           {copiedLink === url.shortened_link ? "✔" : <FaCopy />}
         </button>
         <button
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
-          onClick={() => setShowModal(true)}
+          className="bg-gray-300 text-white font-bold py-1 px-2 rounded hover:bg-blue-500"
+          onClick={() => {
+            setShowEditModal(true);
+          }}
         >
-          <FaTrash />
+          <FaEdit style={{ color: "blue" }} />
         </button>
         <button
           className="bg-[#4169E1] text-white font-bold py-1 px-2 rounded hover:bg-blue-500"
           onClick={() => {
-            setShowQRCodeModal(true)
-            generateQRCode(url.original_link)
+            setShowQRCodeModal(true);
+            generateQRCode(url.original_link);
           }}
         >
-          <FaQrcode/>
+          <FaQrcode />
+        </button>
+        <button
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+          onClick={() => setShowModal(true)}
+        >
+          <FaTrash />
         </button>
       </td>
     </tr>
   );
 };
 
-export default MyURLsItem
+export default MyURLsItem;
