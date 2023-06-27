@@ -52,15 +52,15 @@ const MyURLsItem = ({
           {copiedLink === url.shortened_link ? "✔" : <FaCopy />}
         </button>
         <button
-          className="bg-gray-300 text-white font-bold py-1 px-2 rounded hover:bg-blue-500"
+          className="bg-primaryColor text-white font-bold py-1 px-2 rounded hover:bg-blue-500"
           onClick={() => {
             setShowEditModal(true);
           }}
         >
-          <FaEdit style={{ color: "blue" }} />
+          <FaEdit />
         </button>
         <button
-          className="bg-[#4169E1] text-white font-bold py-1 px-2 rounded hover:bg-blue-500"
+          className="shorten text-white font-bold py-1 px-2 rounded hover:bg-blue-500"
           onClick={() => {
             setShowQRCodeModal(true);
             generateQRCode(url.original_link);

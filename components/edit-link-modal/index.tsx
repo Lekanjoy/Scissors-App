@@ -12,8 +12,8 @@ interface EditLinkModalProp {
   };
   showEditModal: boolean;
   setShowEditModal: (prevState: boolean) => void;
-    isLoading: boolean;
-    setIsLoading: (prevState: boolean) => void;
+  isLoading: boolean;
+  setIsLoading: (prevState: boolean) => void;
 }
 
 const EditLinkModal = ({
@@ -21,18 +21,15 @@ const EditLinkModal = ({
   showEditModal,
   setShowEditModal,
   isLoading,
-setIsLoading
+  setIsLoading,
 }: EditLinkModalProp) => {
   const [customLink, setCustomLink] = useState<string>("");
   // Axios instance
   const api = useAxios();
 
   // Edit Link
-  const editShortenedLink = async (
-    id: number,
-    customLink: string
-  ) => {
-    setIsLoading(true)
+  const editShortenedLink = async (id: number, customLink: string) => {
+    setIsLoading(true);
     try {
       const response = await api.put(`/links/${id}/`, {
         shortened_link: customLink,
@@ -40,7 +37,7 @@ setIsLoading
       await response.data;
       setIsLoading(false);
       setCustomLink("");
-        setShowEditModal(false);
+      setShowEditModal(false);
       toast.success("Link Edited successfully!", {});
     } catch (error) {
       console.error(error);
@@ -79,9 +76,7 @@ setIsLoading
             </svg>
           </button>
         </div>
-        <div
-          className="flex flex-col gap-y-3 w-full p-4 rounded-lg mb-4"
-        >
+        <div className="flex flex-col gap-y-3 w-full p-4 rounded-lg mb-4">
           <input
             type="text"
             className="w-full px-3 py-2 placeholder-[#3284FF] border border-[#3284FF] rounded cursor-not-allowed"

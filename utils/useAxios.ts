@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+import jwt_decode, { JwtPayload }  from "jwt-decode";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import AuthContext from "../AuthContext/authContext";
 
 const baseURL = "https://nwa.pythonanywhere.com"; // Move this to .env and other endpoints
+
 
 const useAxios = () => {
   const { authTokens, setUser, setAuthTokens } = useContext(AuthContext);
@@ -17,9 +18,15 @@ const useAxios = () => {
 
   axiosInstance.interceptors.request.use(async (req) => {
     try {
-      const user = jwt_decode(authTokens?.access);
-      const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
+      const accessTkn: string | undefined = authTokens?.access;
+      const user = accessTkn
+        ? (jwt_decode(accessTkn) as JwtPayload)
+        : undefined;
+      const isExpired =
+        user && user.exp && dayjs.unix(user.exp).diff(dayjs()) < 1;
+
       if (!isExpired) return req;
+
     } catch (error) {
       console.error(error);
       toast.error("Please login first");
