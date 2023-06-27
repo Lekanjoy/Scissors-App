@@ -63,7 +63,7 @@ const GenerateQRCodeModal = ({
       ctx!.closePath();
       ctx!.fill();
 
-      const qrCodeImage = new Image();
+      const qrCodeImage: HTMLImageElement = new Image();
       qrCodeImage.crossOrigin = "anonymous";
       qrCodeImage.src = QRCodeImageLink;
       qrCodeImage.onload = () => {

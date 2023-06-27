@@ -21,14 +21,15 @@ interface SignUpResponse {
 type ContextDataType = {
   user: any;
   setUser: (data: any) => void;
-  setAuthTokens: (data: {
-    access: string;
-    refresh: string;
-  }) => void;
+  // setAuthTokens: (data: {
+  //   access: string;
+  //   refresh: string;
+  // }) => void ;
+  setAuthTokens: (data: any) => void;
   authTokens: {
     access: string;
     refresh: string;
-  } ;
+  } | null;
   loginUser: (userEmail: string, userPassword: string) => void;
   registerUser: (
     userEmail: string,
@@ -44,17 +45,8 @@ type ContextDataType = {
 export default AuthContext;
 
 export const AuthProvider = ({ children }: any) => {
-  const authTokensFromStorage = localStorage.getItem("authTokens");
-  const initialAuthTokens = authTokensFromStorage
-    ? JSON.parse(authTokensFromStorage)
-    : null;
-
-  const initialUser = authTokensFromStorage
-    ? jwt_decode(authTokensFromStorage)
-    : null;
-
-  const [authTokens, setAuthTokens] = useState(initialAuthTokens);
-  const [user, setUser] = useState(initialUser);
+  const [authTokens, setAuthTokens] = useState(null);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const router = useRouter();
@@ -79,7 +71,9 @@ export const AuthProvider = ({ children }: any) => {
       if (response.status === 200) {
         setAuthTokens(data);
         setUser(jwt_decode(data.access));
-        localStorage.setItem("authTokens", JSON.stringify(data));
+        if (typeof window !== "undefined") {
+          localStorage.setItem("authTokens", JSON.stringify(data));
+        }
         toast.success("Login Successfull!", {});
         router.push("/");
       }
@@ -94,7 +88,7 @@ export const AuthProvider = ({ children }: any) => {
     userEmail: string,
     userPassword: string,
     confirmPassWord: string,
-    userName: string,
+    userName: string
   ) => {
     const signUpData: SignUpData = {
       email: userEmail,
@@ -130,30 +124,35 @@ export const AuthProvider = ({ children }: any) => {
   const logoutUser = () => {
     setAuthTokens(null);
     setUser(null);
-    localStorage.removeItem("authTokens");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("authTokens");
+    }
     toast.success("Logged Out!", {});
     router.push("/login");
   };
 
-  const contextData : ContextDataType = {
-    user,
-    setUser,
-    authTokens,
-    setAuthTokens,
-    registerUser,
-    loginUser,
-    logoutUser,
-  };
-
   useEffect(() => {
-    if (authTokens) {
-      setUser(jwt_decode(authTokens.access));
+    const authTokensFromStorage = localStorage.getItem("authTokens");
+    if (authTokensFromStorage) {
+      const initialAuthTokens = JSON.parse(authTokensFromStorage);
+      setAuthTokens(initialAuthTokens);
+      setUser(jwt_decode(initialAuthTokens.access));
     }
     setLoading(false);
-  }, [authTokens, loading]);
+  }, []);
 
   return (
-    <AuthContext.Provider value={contextData}>
+    <AuthContext.Provider
+      value={{
+        user,
+        setUser,
+        authTokens,
+        setAuthTokens,
+        registerUser,
+        loginUser,
+        logoutUser,
+      }}
+    >
       {loading ? null : children}
     </AuthContext.Provider>
   );
