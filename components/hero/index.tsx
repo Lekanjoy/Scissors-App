@@ -12,7 +12,7 @@ const HeroPage = () => {
   return (
     <section className="relative bg-heroBg bg-no-repeat bg-cover bg-center text-center flex flex-col justify-center items-center px-8 lg:px-[93px] lg:pt-[146px]">
       <h1 className="text-blackVariant  font-bold lg:text-5xl lg:mb-2 lg:leading-[96px]">
-        Optimize Your Online Experience with Our <br /> Advanced{" "}
+        Optimize Your Online Experience with Our <br className ="hidden xl:block"/> Advanced{" "}
         <span className="text-[#005AE2] relative">
           URL Shortening
           <Image
