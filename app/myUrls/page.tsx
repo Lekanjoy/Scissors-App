@@ -31,7 +31,12 @@ const MyURLs = () => {
   // Delete a Link
   const deleteLink = async (id: number) => {
     setIsLoading(true);
-    const response = await api.delete(`/links/${id}/`);
+    const deleteEndpoint = process.env.NEXT_PUBLIC_URL_REQUESTS_ENDPOINT;
+    if (!deleteEndpoint) {
+      toast.error("Internal server error, please try again later!");
+      return;
+    }
+    const response = await api.delete(`${deleteEndpoint}${id}/`);
     await response.data;
     setIsLoading(false);
     setShowModal(false);
@@ -49,7 +54,12 @@ const MyURLs = () => {
   // Generate Unique QRcode
   const generateQRCode = async (url:string) => {
     try{
-      const response = fetch(`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${url}`)
+      const QrEndpoint = process.env.NEXT_PUBLIC_URL_QR_ENDPOINT;
+      if (!QrEndpoint) {
+        toast.error("Internal server error, please try again later!");
+        return;
+      }
+      const response = fetch(`${QrEndpoint}=${url}`)
       const QRcode = await response.then(res => res.url)
       setQRCodeImageLink(QRcode);
       toast.success("QR Code generated successfully!", {});
@@ -63,7 +73,12 @@ const MyURLs = () => {
   // List out all links that the user has shortened
   useEffect(() => {
     const getAllLinks = async () => {
-      const response = await api.get("/links/");
+      const getAllLinksEndpoint = process.env.NEXT_PUBLIC_URL_REQUESTS_ENDPOINT;
+      if (!getAllLinksEndpoint) {
+        toast.error("Internal server error, please try again later!");
+        return;
+      }
+      const response = await api.get(getAllLinksEndpoint);
       const data = await response.data;
       setMyUrls(data);
     };

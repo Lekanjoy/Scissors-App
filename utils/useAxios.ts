@@ -5,8 +5,7 @@ import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import AuthContext from "../AuthContext/authContext";
 
-const baseURL = "https://nwa.pythonanywhere.com"; // Move this to .env and other endpoints
-
+const baseURL = process.env.NEXT_PUBLIC_BASE_API_ENDPOINT; 
 
 const useAxios = () => {
   const { authTokens, setUser, setAuthTokens } = useContext(AuthContext);
@@ -33,6 +32,11 @@ const useAxios = () => {
     }
 
     // Refresh Token
+    const refreshEndpoint = process.env.NEXT_PUBLIC_TOKEN_REFRESH_ENDPOINT;
+    if(!refreshEndpoint) {
+      toast.error("Internal Server Error");
+      throw new Error("Refresh token endpoint not found");
+    }
     const response = await axios.post(`${baseURL}/api/token/refresh/`, {
       refresh: authTokens?.refresh,
     });

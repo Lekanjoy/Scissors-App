@@ -2,6 +2,7 @@
 import React, { useContext, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "react-toastify";
 import AuthContext from "@/AuthContext/authContext";
 import { revealPassword } from "@/utils/revealPassword";
 import eye from "@/public/registration/eye.svg";
@@ -12,13 +13,37 @@ const SignupForm = () => {
   const PasswordRef = useRef<HTMLInputElement>(null);
   const PasswordConfirmRef = useRef<HTMLInputElement>(null);
 
-  const { registerUser } = useContext(AuthContext);
+  const { registerUser, isRegistering } = useContext(AuthContext);
 
   const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Check if EmailRef and PasswordRef are not null or undefined
-    if (!EmailRef.current || !PasswordRef.current || !PasswordConfirmRef.current || !UserNameRef.current) return;
-    
+
+    // Check if user credentials are not empty, null or undefined
+    if (
+      !EmailRef.current ||
+      !PasswordRef.current ||
+      !PasswordConfirmRef.current ||
+      !UserNameRef.current ||
+      EmailRef.current.value.trim() === "" ||
+      PasswordRef.current.value.trim() === "" ||
+      PasswordConfirmRef.current.value.trim() === "" ||
+      UserNameRef.current.value.trim() === ""
+    ) {
+      toast.error("All fields are required!");
+      return;
+    }
+    // Check if password is at least 8 characters long
+    if (PasswordRef.current.value.length < 8) {
+      toast.error("Password must be at least 8 characters long!");
+      return;
+    }
+    // Check if password and confirm password are the same
+    if (PasswordRef.current.value !== PasswordConfirmRef.current.value) {
+      toast.error("Passwords do not match!");
+      return;
+    }
+
+    // Register user
     registerUser(
       EmailRef.current?.value,
       PasswordRef.current?.value,
@@ -104,7 +129,9 @@ const SignupForm = () => {
         </div>
         <button
           type="submit"
-          className="w-full px-[18px] py-2 bg-primaryColor mt-4 text-sm text-white rounded-full hover:bg-blue-600"
+          className={`w-full px-[18px] py-2 bg-primaryColor mt-4 text-sm text-white rounded-full hover:bg-blue-600
+          ${isRegistering ? "cursor-not-allowed" : "cursor-pointer"}`}
+          disabled={isRegistering}
         >
           Sign up with Email
         </button>

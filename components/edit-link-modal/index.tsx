@@ -29,9 +29,14 @@ const EditLinkModal = ({
 
   // Edit Link
   const editShortenedLink = async (id: number, customLink: string) => {
-    setIsLoading(true);
     try {
-      const response = await api.put(`/links/${id}/`, {
+      const editEndpoint = process.env.NEXT_PUBLIC_URL_REQUESTS_ENDPOINT;
+      if (!editEndpoint) {
+        toast.error("Internal server error, please try again later!");
+        return;
+      }
+      setIsLoading(true);
+      const response = await api.put(`${editEndpoint}${id}/`, {
         shortened_link: customLink,
       });
       await response.data;

@@ -2,6 +2,7 @@
 import React, { useContext, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "react-toastify";
 import AuthContext from "@/AuthContext/authContext";
 import { revealPassword } from "@/utils/revealPassword";
 import eye from "@/public/registration/eye.svg";
@@ -9,15 +10,23 @@ import eye from "@/public/registration/eye.svg";
 const LoginForm = () => {
   const EmailRef = useRef<HTMLInputElement>(null);
   const PasswordRef = useRef<HTMLInputElement>(null);
-  const {loginUser} = useContext(AuthContext);
-
+  const { loginUser, isLoggingIn} = useContext(AuthContext);
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Check if EmailRef and PasswordRef are not null or undefined
-    if (!EmailRef.current || !PasswordRef.current) return;
+    // Check if user credentials are not empty, null or undefined
+    if (
+      !EmailRef.current ||
+      !PasswordRef.current ||
+      EmailRef.current.value.trim() === "" ||
+      PasswordRef.current.value.trim() === ""
+    ) {
+      toast.error("Email or Password is empty");
+      return;
+    }
+    // Login user
     loginUser(EmailRef.current?.value, PasswordRef.current?.value);
-  }; 
+  };
 
   return (
     <section className="flex flex-col justify-center  items-center w-full h-screen px-8 lg:px-[93px] lg:pt-[146px]">
@@ -74,7 +83,9 @@ const LoginForm = () => {
         </div>
         <button
           type="submit"
-          className="w-full px-[18px] py-2 bg-primaryColor mt-4 text-sm text-white rounded-full hover:bg-blue-600"
+          className={`w-full px-[18px] py-2 bg-primaryColor mt-4 text-sm text-white rounded-full hover:bg-blue-600
+          ${isLoggingIn ? " cursor-not-allowed" : "cursor-pointer"}`}
+          disabled={isLoggingIn}
         >
           Login
         </button>

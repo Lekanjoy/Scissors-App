@@ -35,9 +35,14 @@ const LinkShortenerForm = () => {
       return;
     }
     // Send the user's link to the backend
-    setIsShortening(true);
     try {
-      const response = await api.post("/links/", {
+      const shortenEndpoint = process.env.NEXT_PUBLIC_URL_REQUESTS_ENDPOINT;
+      if (!shortenEndpoint) {
+        toast.error("Internal server error, please try again later!");
+        return;
+      }
+      setIsShortening(true);
+      const response = await api.post(shortenEndpoint, {
         original_link: originalLink,
       });
       await response.data;

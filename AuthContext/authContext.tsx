@@ -38,36 +38,43 @@ type ContextDataType = {
     confirmPassWord: string
   ) => void;
   logoutUser: () => void;
+  isLoggingIn: boolean;
+  isRegistering: boolean;
 };
-
-
 
 export default AuthContext;
 
 export const AuthProvider = ({ children }: any) => {
   const [authTokens, setAuthTokens] = useState(null);
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
+  const [isRegistering, setIsRegistering] = useState<boolean>(false);
 
   const router = useRouter();
 
   // User LogIn Function
   const loginUser = async (userEmail: string, userPassword: string) => {
+    setIsLoggingIn(true);
     try {
-      const response = await fetch(
-        "https://nwa.pythonanywhere.com/api/token/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: userEmail,
-            password: userPassword,
-          }),
-        }
-      );
+      const loginEndpoint = process.env.NEXT_PUBLIC_LOGIN_ENDPOINT;
+      if (!loginEndpoint) return;
+      const response = await fetch(loginEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userEmail,
+          password: userPassword,
+        }),
+      });
       const data = await response.json();
+      setIsLoggingIn(false);
+      if (response.status === 401) {
+        toast.error("Invalid Credentials!", {});
+        return;
+      }
       if (response.status === 200) {
         setAuthTokens(data);
         setUser(jwt_decode(data.access));
@@ -76,10 +83,13 @@ export const AuthProvider = ({ children }: any) => {
         }
         toast.success("Login Successfull!", {});
         router.push("/");
+      } else {
+        toast.error("Login Unsuccessfull!", {});
       }
     } catch (error) {
+      setIsLoggingIn(false);
       console.error(error);
-      toast.error("Login Unsuccessfull!", {});
+      toast.error("Network Error!", {});
     }
   };
 
@@ -96,27 +106,31 @@ export const AuthProvider = ({ children }: any) => {
       password2: confirmPassWord,
       username: userName,
     };
-
+    setIsRegistering(true);
     try {
-      const response = await fetch(
-        "https://nwa.pythonanywhere.com/api/register/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(signUpData),
-        }
-      );
+      const registerEndpoint = process.env.NEXT_PUBLIC_REGISTER_ENDPOINT;
+      if (!registerEndpoint) return;
+     
+      const response = await fetch(registerEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(signUpData),
+      });
+      setIsRegistering(false);
       if (response.status === 201) {
         const data: SignUpResponse = await response.json();
         toast.success("Signup Successfull!", {});
         router.push("/login");
         return data;
+      } else {
+        toast.error("Signup Unsuccessfull!", {});
       }
     } catch (error) {
+      setIsRegistering;
       console.error(error);
-      toast.error("Signup Unsuccessfull!", {});
+      toast.error("Network Error!", {});
     }
   };
 
@@ -151,6 +165,8 @@ export const AuthProvider = ({ children }: any) => {
         registerUser,
         loginUser,
         logoutUser,
+        isLoggingIn,
+        isRegistering,
       }}
     >
       {loading ? null : children}
