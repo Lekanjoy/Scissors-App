@@ -22,7 +22,7 @@ const FAQItem = ({ faq }: FAQItemProps) => {
   return (
     <div className="border-b border-[#D6D6D6] ease-out duration-300  lg:max-w-[795px] lg:pb-4 ">
       <div className="flex justify-between items-center lg:gap-x-4">
-        <h5 className=" font-normal  lg:text-[24px] 2xl:text-[32px]">
+        <h5 className="  font-medium lg:font-normal lg:text-[24px] 2xl:text-[32px]">
           {faq.question}
         </h5>
         {!active ? (
@@ -42,7 +42,7 @@ const FAQItem = ({ faq }: FAQItemProps) => {
         )}
       </div>
       {active && (
-        <p className="lg:mt-4 lg:leading-8 lg:text-base">{faq.answer}</p>
+        <p className="text-sm mt-2 leading-6 lg:mt-4 lg:leading-8 lg:text-base">{faq.answer}</p>
       )}
     </div>
   );

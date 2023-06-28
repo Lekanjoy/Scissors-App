@@ -75,7 +75,7 @@ const LinkShortenerForm = () => {
   };
 
   return (
-    <div className="shorten w-full flex justify-center items-center relative lg:min-h-523px lg:py-[84px]">
+    <div className="shorten w-full min-h-[400px] px-8 py-6 flex justify-center items-center relative lg:min-h-523px lg:py-[84px]">
       <Image
         src={illustRight}
         alt=""
@@ -88,7 +88,7 @@ const LinkShortenerForm = () => {
       />
       <form
         onSubmit={shortenedLink}
-        className="min-w-[476px] z-50 max-w-[480px] text-[#3284FF] text-sm px-[42px] pb-[52px] pt-[42px] bg-white rounded-xl "
+        className=" text-[#3284FF] z-50 w-full text-sm px-8 pb-[30px] pt-[40px]  bg-white rounded-xl md:min-w-[476px]  md:max-w-[480px] lg:px-[42px] lg:pb-[52px] lg:pt-[42px]"
       >
         <div className="mb-4 w-full relative">
           <input
@@ -151,7 +151,7 @@ const LinkShortenerForm = () => {
           {isShortening ? "Trimming URL..." : "Trim URL"}
           <Image src={wand} alt="" className="" />
         </button>
-        <p className="text-sm text-[#4991FF]">
+        <p className="text-xs md:text-sm text-[#4991FF]">
           By clicking Trim URL, I agree to the{" "}
           <span className="text-[#3284FF] font-medium">
             Terms of Service, Privacy Policy{" "}

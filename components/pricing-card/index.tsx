@@ -24,12 +24,12 @@ const PricingCard = () => {
                 : "bg-white scale-100"
             } flex flex-col justify-center cursor-pointer border border-primaryColor  shadow-[0px_4px_8px] shadow-[rgba(0,_0,_0,_0.05)] rounded-xl py-6 px-4  lg:pl-[87px]`}
           >
-            <p className=" lg:text-2xl lg:mb-[34px] ">{plan.title}</p>
-            <p className=" lg:text-[40px] lg:font-medium lg:mb-2">
+            <p className="text-lg mb-3 lg:text-2xl lg:mb-[34px] ">{plan.title}</p>
+            <p className="text-2xl mb-1 lg:text-[40px] lg:font-medium lg:mb-2">
               {plan.price}
             </p>
-            <p className="lg:text-xl lg:mb-4">{plan.description}</p>
-            <div className="flex flex-col lg:gap-y-6">
+            <p className="text-base mb-2 lg:text-xl lg:mb-4">{plan.description}</p>
+            <div className="flex gap-y-3 flex-col lg:gap-y-6">
               {plan.features.map((feature, id) => {
                 return (
                   <div key={id} className="flex items-center gap-x-2">
@@ -38,7 +38,7 @@ const PricingCard = () => {
                       alt="Check circle"
                       className="w-fit"
                     />
-                    <p className="lg:text-sm">{feature.text}</p>
+                    <p className="text-xs md:text-sm lg:text-sm">{feature.text}</p>
                   </div>
                 );
               })}

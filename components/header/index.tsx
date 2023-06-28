@@ -1,17 +1,19 @@
 "use client";
-import { useState, useEffect, useContext} from "react";
+import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { IoMdMenu } from "react-icons/io";
 import { usePathname } from "next/navigation";
 import AuthContext from "@/AuthContext/authContext";
 import Logo from "../../public/header/Logo.svg";
+import MobileNav from "./mobile-nav";
 
 interface NavLinksProps {
   title: string;
   path: string;
 }
 
-const navLinks: NavLinksProps[] = [
+export const navLinks: NavLinksProps[] = [
   { title: "My URLs", path: "/myUrls" },
   { title: "Features", path: "/#features" },
   { title: "Pricing", path: "/#pricing" },
@@ -24,6 +26,7 @@ const Header = () => {
 
   const pathname = usePathname();
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [showMobileNav, setShowMobileNav] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,9 +34,9 @@ const Header = () => {
       setScrollPosition(position);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -47,7 +50,7 @@ const Header = () => {
       <Link href="/">
         <Image src={Logo} alt="Scissors App Logo" />
       </Link>
-      <div className="flex justify-between gap-x-10 text-blackVariant">
+      <div className="hidden justify-between gap-x-10 text-blackVariant lg:flex">
         {navLinks.map((link) => {
           return (
             <Link
@@ -60,7 +63,7 @@ const Header = () => {
           );
         })}
       </div>
-      <div className="flex items-center gap-x-9">
+      <div className="hidden items-center gap-x-9 lg:flex">
         {user ? (
           <button
             onClick={logoutUser}
@@ -82,6 +85,14 @@ const Header = () => {
           </Link>
         )}
       </div>
+      <div
+        onClick={() => setShowMobileNav(!showMobileNav)}
+        className="cursor-pointer lg:hidden"
+      >
+        <IoMdMenu style={{ color: "blue", fontSize: "30px" }} />
+      </div>
+      {/* Hamburger Menu */}
+      {showMobileNav && <MobileNav />}
     </header>
   );
 };

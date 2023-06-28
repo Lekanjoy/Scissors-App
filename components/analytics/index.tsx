@@ -19,20 +19,23 @@ const analyticsData: AnalyticsProps[] = [
 const Analytics = () => {
   
   return (
-    <div id='analytics' className="bg-[#F9FBFD] text-blackVariant w-full min-h-[220px] flex justify-between gap-x-8 items-center px-8 lg:px-[93px]">
-      <div className="text-[40px] font-bold">
+    <div
+      id="analytics"
+      className="bg-[#F9FBFD] text-blackVariant w-full min-h-[220px] flex flex-col px-8 py-10 lg:justify-between  lg:items-center lg:flex-row lg:gap-x-8 lg:px-[93px]"
+    >
+      <div className="font-bold text-3xl text-center mb-10 lg:mb-0 lg:text-[40px] lg:text-left">
         <p>One Stop</p>
         <p>
           Four <span className="text-[#005AE2]">Possibilities.</span>
         </p>
       </div>
-      <div className="flex gap-x-12">
+      <div className="grid grid-cols-2 gap-4  lg:gap-x-12 lg:flex ">
         {analyticsData.map((data) => (
           <div
             key={data.id}
-            className="flex flex-col items-start gap-y-1 w-[145px]"
+            className="flex items-center flex-col lg:items-start lg:gap-y-1 lg:w-[145px]"
           >
-            <p className="text-3xl font-semibold align-self-start">
+            <p className="text-xl font-semibold align-self-start md:text-2xl lg:text-3xl">
               {data.activeUsers !== undefined
                 ? data.activeUsers
                 : data.linksQrGenerated !== undefined
@@ -41,9 +44,10 @@ const Analytics = () => {
                 ? data.clickedOrScanned
                 : data.appIntegration !== undefined
                 ? data.appIntegration
-                : null}M
+                : null}
+              M
             </p>
-            <p className="font-medium text-sm">{data.desc}</p>
+            <p className="text-xs md:text-sm lg:font-medium ">{data.desc}</p>
           </div>
         ))}
       </div>
