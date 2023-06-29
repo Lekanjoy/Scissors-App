@@ -21,7 +21,7 @@ const Analytics = () => {
   return (
     <div
       id="analytics"
-      className="bg-[#F9FBFD] text-blackVariant w-full min-h-[220px] flex flex-col px-8 py-10 lg:justify-between  lg:items-center lg:flex-row lg:gap-x-8 lg:px-[93px]"
+      className="bg-[#F9FBFD] text-blackVariant w-full min-h-[220px] flex flex-col  py-10 px-4 md:px-10 lg:justify-between  lg:items-center lg:flex-row lg:gap-x-8 lg:px-[93px]"
     >
       <div className="font-bold text-3xl text-center mb-10 lg:mb-0 lg:text-[40px] lg:text-left">
         <p>One Stop</p>

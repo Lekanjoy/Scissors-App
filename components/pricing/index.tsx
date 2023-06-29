@@ -6,7 +6,7 @@ const Pricing = () => {
   return (
     <section
       id="pricing"
-      className="w-full px-8 text-blackVariant pt-[42px] pb-14 lg:px-[93px]  lg:pb-[112px]"
+      className="w-full text-blackVariant pt-[42px] pb-14 px-4 md:px-10 lg:px-[93px]  lg:pb-[112px]"
     >
       <div className="text-center flex flex-col justify-center items-center mb-8  lg:mb-[68px]">
         <div className="flex gap-x-4">

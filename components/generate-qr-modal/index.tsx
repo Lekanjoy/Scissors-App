@@ -104,12 +104,12 @@ const GenerateQRCodeModal = ({
 
   return (
     <div
-      className={`fixed z-[200] inset-0  items-center justify-center ${
+      className={`fixed z-[200] inset-0  items-center justify-center px-4 md:px-10 ${
         showQRcodeModal ? "flex" : "hidden"
       }`}
     >
       <div className="fixed inset-0 bg-black opacity-75"></div>
-      <div className="relative z-10 bg-white rounded-lg shadow-lg p-6 lg:min-w-[400px]">
+      <div className="relative z-10 w-full bg-white rounded-lg shadow-lg p-6 lg:max-w-[400px]">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl text-primaryColor font-semibold">
             Scissor.com
@@ -140,12 +140,12 @@ const GenerateQRCodeModal = ({
           </div>
           <button
             className={`flex items-center gap-x-2 px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600
-            ${isDownloading && 'cursor-not-allowed'}`}
+            ${isDownloading && "cursor-not-allowed"}`}
             onClick={handleDownload}
             disabled={isDownloading}
           >
             <FaDownload />
-            {isDownloading ? 'Downloading...' : 'Download'}
+            {isDownloading ? "Downloading..." : "Download"}
           </button>
         </div>
       </div>

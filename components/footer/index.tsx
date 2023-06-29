@@ -10,7 +10,7 @@ import Facebook from "@/public/footer/facebook.svg";
 
 const Footer = () => {
   return (
-    <footer className="w-full relative flex justify-between items-center text-[#112232] text-sm px-8 flex-col pt-[55px] pb-10 lg:flex-row lg:items-start lg:px-[93px] lg:gap-x-5 lg:pt-[95px] lg:pb-10 2xl:gap-x-[63px]">
+    <footer className="w-full relative flex justify-between items-center text-[#112232] text-sm  flex-col pt-[55px] pb-10 px-4 md:px-10 lg:flex-row lg:items-start lg:px-[93px] lg:gap-x-5 lg:pt-[95px] lg:pb-10 2xl:gap-x-[63px]">
       <Image
         src={illustRight}
         alt=""
@@ -22,7 +22,7 @@ const Footer = () => {
         className="absolute max-w-full max-h-full bottom-0 left-0"
       />
       <div className="z-[1] flex gap-y-4 items-center flex-col lg:items-start lg:gap-y-10">
-        <Link href={'/#hero'}>
+        <Link href={"/#hero"}>
           <Image src={Logo} alt="Scissor Logo" />
         </Link>
         <div className="flex items-center gap-x-3 lg:gap-x-6 cursor-pointer">

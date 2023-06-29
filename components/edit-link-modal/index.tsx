@@ -36,8 +36,14 @@ const EditLinkModal = ({
         return;
       }
       setIsLoading(true);
+      const reqDomain = process.env.NEXT_PUBLIC_BASE_API_ENDPOINT;
+      if(!reqDomain){
+                toast.error("Internal server error, please try again later!");
+
+        return;
+      }
       const response = await api.put(`${editEndpoint}${id}/`, {
-        shortened_link: customLink,
+        shortened_link: reqDomain + '/' + customLink ,
       });
       await response.data;
       setIsLoading(false);
@@ -53,12 +59,12 @@ const EditLinkModal = ({
 
   return (
     <div
-      className={`fixed z-[200] inset-0  items-center justify-center ${
+      className={`fixed z-[200] inset-0 items-center justify-center px-4 md:px-10 ${
         showEditModal ? "flex" : "hidden"
       }`}
     >
       <div className="fixed inset-0 bg-black opacity-75"></div>
-      <div className="relative z-10 bg-white rounded-lg shadow-lg p-6 lg:min-w-[400px]">
+      <div className="relative w-full z-10 bg-white rounded-lg shadow-lg p-6 lg:max-w-[550px]">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl text-primaryColor font-semibold">Edit Link</h2>
           <button
@@ -91,7 +97,7 @@ const EditLinkModal = ({
           <input
             type="text"
             className="w-full px-3 py-2 placeholder-[#3284FF] border border-[#3284FF] rounded focus-within:outline-primaryColor"
-            placeholder="https://nwa.pythonanywhere.com/brandName"
+            placeholder="e.g myBrandName"
             value={customLink}
             onChange={(e) => setCustomLink(e.target.value)}
           />

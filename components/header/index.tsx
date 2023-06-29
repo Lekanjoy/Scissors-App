@@ -45,7 +45,7 @@ const Header = () => {
 
   return (
     <header
-      className={`${headerStyle} fixed left-0 top-0 z-[100] w-full flex py-3 justify-between items-center px-8 lg:px-[93px]`}
+      className={`${headerStyle} fixed left-0 top-0 z-[100] w-full flex py-3 justify-between items-center px-4 md:px-10 lg:px-[93px]`}
     >
       <Link href="/">
         <Image src={Logo} alt="Scissors App Logo" />

@@ -20,7 +20,7 @@ const ConfirmationModal = ({
   
   return (
     <div
-      className={`fixed inset-0 bg-[rgba(0,0,0,0.1)]  flex items-center justify-center z-[150] ${
+      className={`fixed inset-0 bg-[rgba(0,0,0,0.1)] flex items-center justify-center z-[150] px-4 md:px-10 ${
         showModal ? "block" : "hidden"
       }`}
     >

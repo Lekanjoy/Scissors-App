@@ -87,61 +87,63 @@ const MyURLs = () => {
   }, [isLoading]);
 
   return (
-    <div className="w-full flex flex-col min-h-[300px] px-8 lg:px-[93px] lg:mt-[146px]">
-      <div className="flex text-blackVariant mb-6 justify-center bg-white items-center lg:gap-x-4">
+    <div className="w-full flex flex-col min-h-[300px] mt-[130px] px-4 md:px-10 lg:px-[93px] lg:mt-[146px]">
+      <div className="flex text-blackVariant mb-6 justify-center bg-white items-center gap-x-4">
         <Image src={before} alt="" className="" />
-        <h4 className="font-semibold text-primaryColor italic lg:text-[40px]">
+        <h4 className="font-semibold text-primaryColor italic text-2xl lg:text-[40px]">
           My URLs
         </h4>
       </div>
-      <table className=" w-full">
-        <thead className="shorten text-white h-16 ">
-          <tr>
-            <th className="border-r-2 ">S/N</th>
-            <th className="border-r-2">Original Link</th>
-            <th className="border-r-2">Shortened Link</th>
-            <th className="border-r-2">Clicks</th>
-            <th className="px-4 border-r-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody className="mt-20">
-          {myUrls.length < 1 && <p className='w-full p-4 flex justify-center items-center text-xl'>YOU HAVE NO LINKS YET</p>}
-          {myUrls.map((url, index) => (
-            <>
-              <MyURLsItem
-                key={url.id}
-                url={url}
-                index={index}
-                setShowModal={setShowModal}
-                setShowQRCodeModal={setShowQRCodeModal}
-                setShowEditModal={setShowEditModal}
-                generateQRCode={generateQRCode}
-                copiedLink={copiedLink}
-                copyLink={copyLink}
-              />
-              <ConfirmationModal
-                showModal={showModal}
-                setShowModal={setShowModal}
-                deleteLink={deleteLink}
-                url={url}
-                isLoading={isLoading}
-              />
-              <GenerateQRCodeModal
-                showQRcodeModal={showQRCodeModal}
-                setShowQRCodeModal={setShowQRCodeModal}
-                QRCodeImageLink={QRCodeImageLink}
-              />
-              <EditLinkModal
-                url={url}
-                showEditModal={showEditModal}
-                setShowEditModal={setShowEditModal}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-              />
-            </>
-          ))}
-        </tbody>
-      </table>
+      <div className="w-full overflow-x-auto">
+        <table className=" w-full">
+          <thead className="shorten text-white h-16 ">
+            <tr>
+              <th className="border-r-2 ">S/N</th>
+              <th className="border-r-2">Original Link</th>
+              <th className="border-r-2">Shortened Link</th>
+              <th className="border-r-2">Clicks</th>
+              <th className="px-4 border-r-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="mt-20">
+            {myUrls.length < 1 && <p className='w-full p-4 flex justify-center items-center text-xl'>YOU HAVE NO LINKS YET</p>}
+            {myUrls.map((url, index) => (
+              <>
+                <MyURLsItem
+                  key={url.id}
+                  url={url}
+                  index={index}
+                  setShowModal={setShowModal}
+                  setShowQRCodeModal={setShowQRCodeModal}
+                  setShowEditModal={setShowEditModal}
+                  generateQRCode={generateQRCode}
+                  copiedLink={copiedLink}
+                  copyLink={copyLink}
+                />
+                <ConfirmationModal
+                  showModal={showModal}
+                  setShowModal={setShowModal}
+                  deleteLink={deleteLink}
+                  url={url}
+                  isLoading={isLoading}
+                />
+                <GenerateQRCodeModal
+                  showQRcodeModal={showQRCodeModal}
+                  setShowQRCodeModal={setShowQRCodeModal}
+                  QRCodeImageLink={QRCodeImageLink}
+                />
+                <EditLinkModal
+                  url={url}
+                  showEditModal={showEditModal}
+                  setShowEditModal={setShowEditModal}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
+                />
+              </>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

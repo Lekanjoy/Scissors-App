@@ -9,7 +9,7 @@ const Why = () => {
   return (
     <section
       id="features"
-      className="bg-white w-full text-blackVariant flex flex-col justify-between py-10 lg:gap-x-24 px-8 lg:flex-row lg:px-[93px] lg:py-[136px]"
+      className="bg-white w-full text-blackVariant flex flex-col justify-between py-10 px-4 md:px-10 lg:gap-x-24 lg:flex-row lg:px-[93px] lg:py-[136px]"
     >
       <div className="w-full flex flex-col mb-10 lg:mb-0 lg:max-w-[420px] ">
         <h3 className="flex whitespace-nowrap text-2xl items-center justify-center mb-3 lg:justify-start lg:items-start lg:mb-6 lg:font-bold lg:text-[40px]">

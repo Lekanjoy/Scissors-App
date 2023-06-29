@@ -5,7 +5,7 @@ import illustLeft from "@/public/CTA/left-illust.svg";
 const CTA = () => {
   
   return (
-    <section className="relative shorten w-full min-h-[200px] text-white flex flex-col justify-center items-center gap-y-4 lg:gap-y-8 lg:min-h-[300px]">
+    <section className="relative shorten w-full min-h-[200px] text-white flex flex-col justify-center items-center gap-y-4 px-4 md:px-10 lg:gap-y-8 lg:min-h-[300px]">
       <Image
         src={illustRight}
         alt=""

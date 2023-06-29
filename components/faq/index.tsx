@@ -9,7 +9,10 @@ const FAQ = () => {
 
 
   return (
-    <section id='faq' className="relative text-[#141414] flex items-center justify-center flex-col w-full px-8 pt-6 pb-16 lg:min-h-[1000px] lg:pt-11 lg:pb-[155px] lg:px-[93px]">
+    <section
+      id="faq"
+      className="relative text-[#141414] flex items-center justify-center flex-col w-full  pt-6 pb-16 px-4 md:px-10 lg:min-h-[1000px] lg:pt-11 lg:pb-[155px] lg:px-[93px]"
+    >
       <Image
         src={illustRight}
         alt=""
@@ -26,9 +29,7 @@ const FAQ = () => {
       </div>
       <div className="flex flex-col mt-8 gap-y-5 lg:gap-y-8 lg:mt-16">
         {faqData.map((faq) => {
-          return (
-            <FAQItem faq={faq} key={faq.id} />
-          );
+          return <FAQItem faq={faq} key={faq.id} />;
         })}
       </div>
     </section>

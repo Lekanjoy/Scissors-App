@@ -75,7 +75,7 @@ const LinkShortenerForm = () => {
   };
 
   return (
-    <div className="shorten w-full min-h-[400px] px-8 py-6 flex justify-center items-center relative lg:min-h-523px lg:py-[84px]">
+    <div className="shorten w-full min-h-[400px]  py-6 flex justify-center items-center relative px-4 md:px-10 lg:min-h-523px lg:py-[84px]">
       <Image
         src={illustRight}
         alt=""
