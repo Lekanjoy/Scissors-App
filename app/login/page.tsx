@@ -29,7 +29,7 @@ const LoginForm = () => {
   };
 
   return (
-    <section className="flex flex-col justify-center  items-center w-full h-screen px-8 lg:px-[93px] lg:pt-[146px]">
+    <section className="flex flex-col justify-center  items-center w-full h-screen px-4 md:px-10 lg:px-[93px] lg:pt-[146px]">
       <p className="mb-4 text-sm text-[#5C6F7F]">Log in with:</p>
       <div className="flex gap-x-6 mb-4">
         <button className="w-[109px] h-10 flex justify-center items-center gap-x-[3px] text-sm text-white bg-primaryColor rounded">
@@ -51,13 +51,13 @@ const LoginForm = () => {
           Apple
         </button>
       </div>
-      <div className="text-[#5C6F7F] relative mb-8 before:absolute before:bottom-[10px] before:bg-[#A0B1C0] before:right-[20px] before:w-[200px] before:h-[1px] after:absolute after:bottom-[10px] after:left-[20px] after:w-[200px] after:h-[1px] after:bg-[#A0B1C0]">
+      <div className="text-[#5C6F7F] w-full text-center relative mb-8 before:absolute before:bottom-[10px] before:bg-[#A0B1C0] before:right-[20px]  before:h-[1px] after:absolute after:bottom-[10px] after:left-[20px]  after:h-[1px] after:bg-[#A0B1C0] before:w-[40%] after:w-[40%] lg:w-auto lg:before:w-[200px] lg:after:w-[200px]">
         Or
       </div>
       <form
         autoComplete="true"
         onSubmit={handleLogin}
-        className="w-[430px] flex flex-col gap-y-8"
+        className="w-full flex flex-col gap-y-8 lg:w-[430px]"
       >
         <div className="relative w-full">
           <input

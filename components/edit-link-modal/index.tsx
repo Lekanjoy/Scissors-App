@@ -10,7 +10,6 @@ interface EditLinkModalProp {
     original_link: string;
     shortened_link: string;
   };
-  showEditModal: boolean;
   setShowEditModal: (prevState: boolean) => void;
   isLoading: boolean;
   setIsLoading: (prevState: boolean) => void;
@@ -18,12 +17,13 @@ interface EditLinkModalProp {
 
 const EditLinkModal = ({
   url,
-  showEditModal,
   setShowEditModal,
   isLoading,
   setIsLoading,
 }: EditLinkModalProp) => {
+  // Custom link state
   const [customLink, setCustomLink] = useState<string>("");
+
   // Axios instance
   const api = useAxios();
 
@@ -37,13 +37,12 @@ const EditLinkModal = ({
       }
       setIsLoading(true);
       const reqDomain = process.env.NEXT_PUBLIC_BASE_API_ENDPOINT;
-      if(!reqDomain){
-                toast.error("Internal server error, please try again later!");
-
+      if (!reqDomain) {
+        toast.error("Internal server error, please try again later!");
         return;
       }
       const response = await api.put(`${editEndpoint}${id}/`, {
-        shortened_link: reqDomain + '/' + customLink ,
+        shortened_link: reqDomain + "/" + customLink,
       });
       await response.data;
       setIsLoading(false);
@@ -59,9 +58,7 @@ const EditLinkModal = ({
 
   return (
     <div
-      className={`fixed z-[200] inset-0 items-center justify-center px-4 md:px-10 ${
-        showEditModal ? "flex" : "hidden"
-      }`}
+      className={`fixed z-[200] inset-0 items-center justify-center px-4 md:px-10 flex`}
     >
       <div className="fixed inset-0 bg-black opacity-75"></div>
       <div className="relative w-full z-10 bg-white rounded-lg shadow-lg p-6 lg:max-w-[550px]">
@@ -69,7 +66,9 @@ const EditLinkModal = ({
           <h2 className="text-xl text-primaryColor font-semibold">Edit Link</h2>
           <button
             className="text-gray-500 hover:text-gray-700"
-            onClick={() => setShowEditModal(false)}
+            onClick={() => {
+              setShowEditModal(false);
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +94,7 @@ const EditLinkModal = ({
             disabled
           />
           <input
-            type="text"
+            type="url"
             className="w-full px-3 py-2 placeholder-[#3284FF] border border-[#3284FF] rounded focus-within:outline-primaryColor"
             placeholder="e.g myBrandName"
             value={customLink}

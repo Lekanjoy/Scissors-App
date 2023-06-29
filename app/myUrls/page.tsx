@@ -4,10 +4,8 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import useAxios from "@/utils/useAxios";
 import MyURLsItem from "@/components/myURLsItem";
-import ConfirmationModal from "@/components/confirmation-modal";
 import GenerateQRCodeModal from "@/components/generate-qr-modal";
 import before from "@/public/why/before.svg";
-import EditLinkModal from "@/components/edit-link-modal";
 
 interface MyURLDataProps {
   id: number;
@@ -19,10 +17,8 @@ interface MyURLDataProps {
 const MyURLs = () => {
   const [myUrls, setMyUrls] = useState<MyURLDataProps[]>([]);
   const [copiedLink, setCopiedLink] = useState<string>("");
-  const [showModal, setShowModal] = useState<boolean>(false);
   const [showQRCodeModal, setShowQRCodeModal] = useState<boolean>(false);
-  const [QRCodeImageLink, setQRCodeImageLink] = useState<string>('')
-  const [showEditModal, setShowEditModal] = useState<boolean>(false);
+  const [QRCodeImageLink, setQRCodeImageLink] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Axios instance
@@ -39,8 +35,8 @@ const MyURLs = () => {
     const response = await api.delete(`${deleteEndpoint}${id}/`);
     await response.data;
     setIsLoading(false);
-    setShowModal(false);
-    toast.success("Link deleted successfully!", {});
+    // setShowModal(false);
+    toast.success("Link deleted successfully!");
   };
 
   // Copy a link to clipboard
@@ -50,25 +46,23 @@ const MyURLs = () => {
     toast.success("Link Copied!", {});
   };
 
-
   // Generate Unique QRcode
-  const generateQRCode = async (url:string) => {
-    try{
+  const generateQRCode = async (url: string) => {
+    try {
       const QrEndpoint = process.env.NEXT_PUBLIC_URL_QR_ENDPOINT;
       if (!QrEndpoint) {
         toast.error("Internal server error, please try again later!");
         return;
       }
-      const response = fetch(`${QrEndpoint}=${url}`)
-      const QRcode = await response.then(res => res.url)
+      const response = fetch(`${QrEndpoint}=${url}`);
+      const QRcode = await response.then((res) => res.url);
       setQRCodeImageLink(QRcode);
       toast.success("QR Code generated successfully!", {});
-    } catch(error){
+    } catch (error) {
       console.error(error);
       toast.error("Error generating QRcode", {});
     }
   };
-
 
   // List out all links that the user has shortened
   useEffect(() => {
@@ -105,43 +99,33 @@ const MyURLs = () => {
               <th className="px-4 border-r-2">Actions</th>
             </tr>
           </thead>
-          <tbody className="mt-20">
-            {myUrls.length < 1 && <p className='w-full p-4 flex justify-center items-center text-xl'>YOU HAVE NO LINKS YET</p>}
+          <>
+            {myUrls.length < 1 && (
+              <p className="w-full p-4 flex justify-center items-center text-xl">
+                YOU HAVE NO LINKS YET
+              </p>
+            )}
             {myUrls.map((url, index) => (
-              <>
+              <tbody key={url.id} className="mt-20">
                 <MyURLsItem
-                  key={url.id}
                   url={url}
                   index={index}
-                  setShowModal={setShowModal}
                   setShowQRCodeModal={setShowQRCodeModal}
-                  setShowEditModal={setShowEditModal}
                   generateQRCode={generateQRCode}
                   copiedLink={copiedLink}
                   copyLink={copyLink}
-                />
-                <ConfirmationModal
-                  showModal={showModal}
-                  setShowModal={setShowModal}
                   deleteLink={deleteLink}
-                  url={url}
                   isLoading={isLoading}
+                  setIsLoading={setIsLoading}
                 />
                 <GenerateQRCodeModal
                   showQRcodeModal={showQRCodeModal}
                   setShowQRCodeModal={setShowQRCodeModal}
                   QRCodeImageLink={QRCodeImageLink}
                 />
-                <EditLinkModal
-                  url={url}
-                  showEditModal={showEditModal}
-                  setShowEditModal={setShowEditModal}
-                  isLoading={isLoading}
-                  setIsLoading={setIsLoading}
-                />
-              </>
+              </tbody>
             ))}
-          </tbody>
+          </>
         </table>
       </div>
     </div>

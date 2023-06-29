@@ -92,7 +92,7 @@ const LinkShortenerForm = () => {
       >
         <div className="mb-4 w-full relative">
           <input
-            type="text"
+            type="url"
             value={originalLink}
             onChange={(e) => setOriginalLink(e.target.value)}
             className="w-full px-3 py-2 placeholder-[#3284FF] border border-[#3284FF] rounded-xl focus-within:outline-primaryColor"

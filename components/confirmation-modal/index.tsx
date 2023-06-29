@@ -1,28 +1,34 @@
 'use client'
 
 type ConfirmationModalProps = {
-  showModal: boolean;
   setShowModal: (prevState: boolean) => void;
   url: {
     id: number;
+    count: number;
+    original_link: string;
+    shortened_link: string;
   };
   deleteLink: (id: number) => void;
   isLoading: boolean;
 };
 
 const ConfirmationModal = ({
-  showModal,
   setShowModal,
   url,
   deleteLink,
   isLoading,
 }: ConfirmationModalProps) => {
+
+  const cancelDeleteModal = () => {
+    setShowModal(false);
+    console.log(url.id);
+  }
   
   return (
     <div
-      className={`fixed inset-0 bg-[rgba(0,0,0,0.1)] flex items-center justify-center z-[150] px-4 md:px-10 ${
-        showModal ? "block" : "hidden"
-      }`}
+      className={`fixed inset-0 bg-[rgba(0,0,0,0.1)] flex items-center justify-center z-[150] px-4 md:px-10 
+        block 
+      `}
     >
       <div className="bg-white shadow-md border w-full max-w-md p-6 rounded-lg">
         <div className="flex items-center justify-center mb-6">
@@ -57,7 +63,7 @@ const ConfirmationModal = ({
           </button>
           <button
             className="ml-2 px-4 py-2 rounded-md text-gray-700 bg-gray-200 hover:bg-gray-300"
-            onClick={() => setShowModal(!showModal)}
+            onClick={cancelDeleteModal}
             disabled={isLoading}
           >
             Cancel

@@ -35,7 +35,7 @@ const Analytics = () => {
             key={data.id}
             className="flex items-center flex-col lg:items-start lg:gap-y-1 lg:w-[145px]"
           >
-            <p className="text-xl font-semibold align-self-start md:text-2xl lg:text-3xl">
+            <p className="text-xl font-semibold md:text-2x lg:align-self-start l lg:text-3xl">
               {data.activeUsers !== undefined
                 ? data.activeUsers
                 : data.linksQrGenerated !== undefined
