@@ -55,7 +55,7 @@ const LinkShortenerForm = () => {
       setIsShortening(false);
       console.error(error);
       axios.isAxiosError(error) &&
-        toast.error(`${error?.response?.data || error.message}`);
+        toast.error(`${ error.message}`);
     }
   };
 
@@ -87,11 +87,13 @@ const LinkShortenerForm = () => {
         className="absolute max-w-full max-h-full top-0 left-0"
       />
       <form
+        role="form"
         onSubmit={shortenedLink}
         className=" text-[#3284FF] z-50 w-full text-sm px-8 pb-[30px] pt-[40px]  bg-white rounded-xl md:min-w-[476px]  md:max-w-[480px] lg:px-[42px] lg:pb-[52px] lg:pt-[42px]"
       >
         <div className="mb-4 w-full relative">
           <input
+            data-testid="url-input"
             type="url"
             value={originalLink}
             onChange={(e) => setOriginalLink(e.target.value)}
