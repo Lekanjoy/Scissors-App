@@ -55,7 +55,7 @@ const LinkShortenerForm = () => {
       setIsShortening(false);
       console.error(error);
       axios.isAxiosError(error) &&
-        toast.error(`${ error.message}`);
+        toast.error("Please login first" || `${error.message}`);
     }
   };
 
