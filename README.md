@@ -1,34 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Scissor: Cutting-Edge Link Shortener Web App 🎉
 
-## Getting Started
+Welcome to Scissor, the cutting-edge link-shortener web app that makes URL management a breeze! Built with a stack including Next.js, TypeScript, Python, and Node.js, Scissor provides a seamless and secure solution for shortening your URLs while ensuring the privacy and control of registered users.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- **User-Centric Approach:** Scissor prioritizes registered members, giving them exclusive access to the app's full functionality.
+- **Simplified URL Shortening:** Once signed in, users can effortlessly input lengthy URLs and instantly shorten them with a single click.
+- **Efficient Link Management:** Successfully shortened URLs lead users to the intuitive myURLs page, where they can manage their collection of trimmed links.
+- **Customization Options:** The myURLs page empowers users to personalize their shortened links to their liking.
+- **QR Code Generation:** Users can generate downloadable QR codes for their shortened links, making sharing even more convenient.
+- **Easy Sharing:** Copy the shortened links with ease for quick and hassle-free sharing.
+- **Link Deletion:** Unnecessary links are easily removable, giving users complete control over their shortened URL collection.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js:** A popular React framework that enhances server-rendered React applications.
+- **TypeScript:** A superset of JavaScript that provides static typing for enhanced code quality and development.
+- **Python:** A versatile programming language used for various backend functionalities.
+- **Node.js:** A JavaScript runtime that allows building scalable and performant network applications.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Quality Assurance
 
-## Learn More
+To ensure the reliability and quality of Scissor, comprehensive unit and component tests have been conducted using the React Testing Library in conjunction with Jest. Our commitment to testing continues as we explore further ways to optimize and fine-tune Scissor's performance.
 
-To learn more about Next.js, take a look at the following resources:
+## Explore Scissor
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+🔗 Ready to explore Scissor? Visit it here: [https://lnkd.in/dmjqNGCr](https://lnkd.in/dmjqNGCr)
